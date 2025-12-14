@@ -1,0 +1,755 @@
+{
+  "general": [
+    {
+      "title": "Home",
+      "url": "https://kemu.ac.ke/",
+      "summary": "Kenya Methodist University homepage featuring academic calendar information, registration dates, examination schedules, and key university announcements. The university offers PhD, Masters, Degree, Diploma, and Certificate programmes across multiple campuses in Meru, Nairobi, and Mombasa.",
+      "details": [
+        "Trimester 3, 2025 Academic Calendar",
+        "Registration: Monday, 1st – Friday, 5th September 2025",
+        "Lectures begin: Monday, 8th September 2025",
+        "Final exams results for Trimester 2, 2025 released: Friday, 19th September 2025",
+        "End of Trimester 1, 2025 Examinations: Monday, 1st – Saturday, 13th December 2025"
+      ]
+    },
+    {
+      "title": "Job Vacancies",
+      "url": "https://kemu.ac.ke/job-vacancies",
+      "summary": "Kenya Methodist University invites qualified applicants for various positions across the university. The job vacancies page lists current openings including academic positions such as lecturers in various fields (Cybersecurity and Ethical Hacking, Data Science & Machine Learning, Communication & Journalism, Law, Medical Laboratory Sciences, Health Systems Management, Medicine & Surgery, Pharmacy), as well as support staff positions (Games Tutor, Janitor, Hostel Attendant, Carpenter). The university is a chartered private Christian University sponsored by the Methodist Church in Kenya with main campus in Meru and campuses in Nairobi and Mombasa.",
+      "details": [
+        "Academic positions: Lecturers in various fields",
+        "Support staff positions: Games Tutor, Janitor, Hostel Attendant, Carpenter",
+        "Positions available across all campuses (Meru, Nairobi, Mombasa)",
+        "Regular updates posted for new vacancies"
+      ]
+    },
+    {
+      "title": "Courses on Offer",
+      "url": "https://kemu.ac.ke/courses-on-offer",
+      "summary": "The Courses on Offer page provides a comprehensive overview of all academic programmes available at Kenya Methodist University organized by school. The page lists courses from KeMU Business School, School of Education and Social Sciences, School of Medicine and Pharmacy, School of Science and Technology, School of Health Sciences, School of Computing and Informatics, School of Law, School of Economics and Political Science, and TVET Programmes. This serves as a central resource for prospective students to explore all available academic options.",
+      "details": [
+        "Organized by school/faculty",
+        "KeMU Business School",
+        "School of Education and Social Sciences",
+        "School of Medicine and Pharmacy",
+        "School of Science and Technology",
+        "School of Health Sciences",
+        "School of Computing and Informatics",
+        "School of Law",
+        "School of Economics and Political Science",
+        "TVET Programmes"
+      ]
+    }
+  ],
+  "about": [
+    {
+      "title": "All About KeMU",
+      "url": "https://kemu.ac.ke/about-kemu",
+      "summary": "Kenya Methodist University is a Chartered Christian University with main campus in Meru and additional campuses in Nairobi and Mombasa. The university offers PhD, Masters, Degree, Diploma, and Certificate programmes. KeMU has over 32,000 alumni and is the first and only private university in Kenya to graduate medical doctors. The university focuses on market-driven courses, industry linkages, and opportunities outside the classroom.",
+      "details": []
+    },
+    {
+      "title": "Our History",
+      "url": "https://kemu.ac.ke/our-history",
+      "summary": "Kenya Methodist University (KeMU) is a Christian chartered private university founded by the Methodist Church in Kenya (MCK). The Church first established Kaaga Rural Training Centre for agricultural training, then the Methodist Training Institute (MTI) for training ministers. In 1984, the Church decided to establish a university in Kaaga, Meru. A committee was formed in 1987 to develop modalities. The Commission for Higher Education (CHE) granted a Letter of Interim Authority in June 1997, and KeMU became a chartered university in June 2006 when granted a Charter by President Mwai Kibaki.",
+      "details": [
+        "Founded by Methodist Church in Kenya (MCK)",
+        "Originated from Kaaga Rural Training Centre",
+        "Methodist Training Institute (MTI) established for minister training",
+        "1984: Decision to establish university in Kaaga, Meru",
+        "1987: Committee formed to develop university modalities",
+        "1995: CHE inspection visit",
+        "June 1997: Letter of Interim Authority granted",
+        "June 2006: Chartered by President Mwai Kibaki"
+      ]
+    },
+    {
+      "title": "Our Vision, Mission, Motto and Slogan",
+      "url": "https://kemu.ac.ke/our-vision-mission-motto-and-slogan",
+      "summary": "Kenya Methodist University's vision is to be a globally competitive Christian University producing the next generation of professional and transformational leaders. The page outlines the university's mission, motto, and slogan which guide the institution's operations and educational philosophy.",
+      "details": [
+        "Vision: A globally competitive Christian University producing the next generation of professional and transformational leaders"
+      ]
+    },
+    {
+      "title": "Our Core Values",
+      "url": "https://kemu.ac.ke/our-core-values",
+      "summary": "The Guide to KeMU values is intended to guide staff, students, and all friends of the university in respect to moral, academic, professional and social values appropriate to Kenya Methodist University. The embodiment of these values by the KeMU community is in-keeping with the sponsor's vision to found a Christian university that produces professionally competent men and women of integrity. The University Management embraces the vision that graduates who are spiritually well nurtured and professionally competent are the salt and the light of the world and effective agents of transforming the world.",
+      "details": [
+        "Guide to KeMU values for staff, students, and friends of the university",
+        "Focus on moral, academic, professional and social values",
+        "Produces professionally competent men and women of integrity",
+        "Graduates are spiritually well nurtured and professionally competent"
+      ]
+    }
+  ],
+  "governance": [
+    {
+      "title": "Governance Structure",
+      "url": "https://kemu.ac.ke/governance-structure",
+      "summary": "Kenya Methodist University's governance structure includes the Board of Trustees, University Council, University Management, University Senate, University Chancellor, Office of the Vice-Chancellor, Finance and Administration Division, and Academic and Student Affairs Division. The governance structure ensures proper oversight and management of the university's operations and academic affairs.",
+      "details": [
+        "Board of Trustees",
+        "University Council",
+        "University Management",
+        "University Senate",
+        "University Chancellor",
+        "Office of the Vice-Chancellor",
+        "Finance and Administration Division",
+        "Academic and Student Affairs Division"
+      ]
+    },
+    {
+      "title": "The Board of Trustees",
+      "url": "https://kemu.ac.ke/the-board-of-trustees",
+      "summary": "The Board of Trustees (BoT) is constituted in accordance with the Trustees Act Cap. 167 of 2009, the University Charter and other relevant laws. The membership consists of representatives of the sponsor and various professionals. The Board includes Rev. Dr. Samuel Kobia as Chairman, along with members such as Justice (Rtd) Aaron Ringera, Mr. George Mutwiri, Rev. Dr. Nicholas Mutwiri, Mrs. Gladys Mugambi, Prof. Sheila Ryanga, Mr. Gitonga Muriuki, Hon. Linah Jebii Kilimo, Mr. Jonson Dima, Mr. Samuel Kaumbuthu, and Hon. Charity K. Chepkwony.",
+      "details": [
+        "Constituted under Trustees Act Cap. 167 of 2009 and University Charter",
+        "Membership includes sponsor representatives and various professionals",
+        "Rev. Dr. Samuel Kobia - Chairman",
+        "Members include Justice (Rtd) Aaron Ringera, Mr. George Mutwiri, Rev. Dr. Nicholas Mutwiri, Mrs. Gladys Mugambi, Prof. Sheila Ryanga, Mr. Gitonga Muriuki, Hon. Linah Jebii Kilimo, Mr. Jonson Dima, Mr. Samuel Kaumbuthu, Hon. Charity K. Chepkwony"
+      ]
+    },
+    {
+      "title": "The University Council",
+      "url": "https://kemu.ac.ke/the-university-council",
+      "summary": "The University Council is constituted in accordance with the University Charter and other relevant laws. The membership consists of various professionals as appointed by the Board of Trustees. The Council is chaired by Rev. Dr. Catherine Mutua, with Rev. Prof. John Kobia Ataya serving as Vice-Chancellor and Secretary. The Council includes members such as Mr. Francis Njogu, Ms. Qabale Duba (HSC), Mr. Musa Chepkurui, Mr. Zablon Nyale, Dr. Isaac Kaberia, Mr. Henry Kurauka, Mr. Philip Maobe, Rev. Prof. Joseph Galgalo, Rtd. Justice Aaron Ringera, Ms. Jenu John, Hon. Rachael Amolo, Mr. George Mutwiri, and Mr. John Mati Lautani.",
+      "details": [
+        "Constituted under University Charter and relevant laws",
+        "Members appointed by Board of Trustees",
+        "Rev. Dr. Catherine Mutua - Chairperson",
+        "Rev. Prof. John Kobia Ataya - Vice-Chancellor and Secretary",
+        "Members include Mr. Francis Njogu, Ms. Qabale Duba (HSC), Mr. Musa Chepkurui, Mr. Zablon Nyale, Dr. Isaac Kaberia, Mr. Henry Kurauka, Mr. Philip Maobe, Rev. Prof. Joseph Galgalo, Rtd. Justice Aaron Ringera, Ms. Jenu John, Hon. Rachael Amolo, Mr. George Mutwiri, Mr. John Mati Lautani"
+      ]
+    },
+    {
+      "title": "University Management",
+      "url": "https://kemu.ac.ke/university-management",
+      "summary": "The University Management Board (UMB) is led by Rev. Prof. John Kobia Ataya, Ph.D as Vice-Chancellor and Chair of the UMB. The management includes Dr. Eliab Seroney Some, Ph.D as DVC, Administration, Planning, and Finance; Dr. Mwiti Evans, Ph.D as DVC, Academic and Student Affairs; Dr. Lucy Kanyiri Ikiara, Ph.D as Registrar (Academic Affairs); Prof. Paul Maku Gichohi, Ph.D as University Librarian; Dr. Stephen Laititi Mutunga, Ph.D as Registrar (Administration, Planning & Development); Dr. Susan Kajuju Laimaru, Ph.D as Principal, Nairobi Campus; Rev. Dr. Justus Bundi, Ph.D as Director, Mombasa Campus; Dr. Esther Gakii Mbaabu, Ph.D in Department of Student Welfare; Rev. Dr. Jennifer Kinya Lairang'i, Ph.D as University Chaplain; Dr. Rosemary Kirambia, Ph.D as Director, Directorate of Corporate Communication, Marketing, Alumni Coordination; Mbugua Njeri, LL.B as Legal Officer; and Mr. Humphrey Mwenda Murugu as Chief Financial Officer (CFO).",
+      "details": [
+        "Rev. Prof. John Kobia Ataya, Ph.D - Vice-Chancellor and Chair of the UMB",
+        "Dr. Eliab Seroney Some, Ph.D - DVC, Administration, Planning, and Finance",
+        "Dr. Mwiti Evans, Ph.D - DVC, Academic and Student Affairs",
+        "Dr. Lucy Kanyiri Ikiara, Ph.D - Registrar (Academic Affairs)",
+        "Prof. Paul Maku Gichohi, Ph.D - University Librarian",
+        "Dr. Stephen Laititi Mutunga, Ph.D - Registrar (Administration, Planning & Development)",
+        "Dr. Susan Kajuju Laimaru, Ph.D - Principal, Nairobi Campus",
+        "Rev. Dr. Justus Bundi, Ph.D - Director, Mombasa Campus",
+        "Dr. Esther Gakii Mbaabu, Ph.D - Department of Student Welfare",
+        "Rev. Dr. Jennifer Kinya Lairang'i, Ph.D - University Chaplain",
+        "Dr. Rosemary Kirambia, Ph.D - Director, Directorate of Corporate Communication, Marketing, Alumni Coordination",
+        "Mbugua Njeri, LL.B - Legal Officer",
+        "Mr. Humphrey Mwenda Murugu - Chief Financial Officer (CFO)"
+      ]
+    },
+    {
+      "title": "University Senate",
+      "url": "https://kemu.ac.ke/university-senate",
+      "summary": "The University Senate consists of the Vice-Chancellor (who serves as Chairman), the Deputy Vice-Chancellor, the principal of each constituent college, the Deans of the faculties, institutes and schools, the Chairman of the teaching departments, the Librarian, one representative of each faculty board, the professors of the University, two members elected by the students' organization (with restrictions on confidential matters), and any other members as provided for in the statutes. The Senate has powers to satisfy itself regarding the content and academic standard of courses, propose regulations for admission and examination standards, decide which persons have attained the prescribed standard of proficiency for degrees, diplomas, certificates or other awards, initiate proposals relating to the conduct of the University, and make regulations governing matters within its powers.",
+      "details": [
+        "Vice-Chancellor serves as Chairman",
+        "Includes Deputy Vice-Chancellor, principals, deans, department chairmen, librarian, faculty representatives, professors, and student representatives",
+        "Powers include: reviewing course content and academic standards, proposing admission and examination regulations, deciding on degree/diploma/certificate awards, initiating university proposals, making regulations within its powers",
+        "Student representatives have restricted access to confidential matters relating to discipline, examination results, and academic performance"
+      ]
+    },
+    {
+      "title": "The University Chancellor",
+      "url": "https://kemu.ac.ke/the-university-chancellor",
+      "summary": "According to The Universities Act 2012, the Chancellor is the titular head of the University and confers degrees, grants diplomas, certificates and other awards in the name of the University. The Chancellor may recommend visitations to the Cabinet Secretary (public universities) or Board of Trustees (private universities), give advice to the Council, and enjoys powers and privileges as provided in the Charter. The Presiding Bishop of the Methodist Church in Kenya serves as the Chancellor. Currently, Rev. Isiah Deye holds this position.",
+      "details": [
+        "Titular head of the University",
+        "Confers degrees and grants diplomas, certificates and other awards",
+        "May recommend visitations",
+        "May give advice to the Council",
+        "Powers and privileges as provided in the Charter",
+        "Presiding Bishop of the Methodist Church in Kenya serves as Chancellor",
+        "Current Chancellor: Rev. Isiah Deye"
+      ]
+    },
+    {
+      "title": "The Office of the Vice Chancellor",
+      "url": "https://kemu.ac.ke/the-office-of-the-vice-chancellor",
+      "summary": "The Vice-Chancellor is appointed by the University Council in accordance with the University Charter. The Vice-Chancellor is the Chief Executive of the University and serves as the academic and administrative head with overall responsibility for the direction, organization, administration and programmes of the University. Responsibilities include directing, promoting and coordinating university activities; being responsible for academic, administrative, financial and development matters; serving as the accounting officer; acting as the University's representative and spokesperson in external relations; and serving as an ex-officio member of the Council. Currently, Rev. Prof. John Kobia Ataya, Ph.D serves as Vice-Chancellor.",
+      "details": [
+        "Appointed by University Council",
+        "Chief Executive of the University",
+        "Academic and administrative head",
+        "Responsibilities: direct, promote and coordinate activities; responsible for academic/administrative/financial/development; accounting officer; representative/spokesperson; ex-officio of Council",
+        "Current Vice-Chancellor: Rev. Prof. John Kobia Ataya, Ph.D"
+      ]
+    },
+    {
+      "title": "Finance and Administration Division",
+      "url": "https://kemu.ac.ke/finance-and-administration-division",
+      "summary": "The Office of the Deputy Vice Chancellor for Finance and Administration is responsible for the managerial and financial aspects of the university, including administration, finance, development and planning functions, and all aspects of the day-to-day running of KeMU. The division provides exceptional service and stewardship of the University's financial, human and physical resources. Functions include managing payroll, capital projects, student accounts, employee benefits, information services, food services, campus maintenance and landscaping, budgeting, and campus and environmental safety. The division strives to become a trusted advisor, providing exemplary service to support the academic, research and community engagement mission of the University. Core values include integrity, teamwork through mutual respect and fairness, and excellence in service and innovation. Currently led by Dr. Eliab Seroney Some, Ph.D as DVC.",
+      "details": [
+        "Responsible for managerial and financial aspects",
+        "Administration, finance, development and planning functions",
+        "Day-to-day running of KeMU",
+        "Manages: payroll, capital projects, student accounts, employee benefits, information services, food services, campus maintenance, landscaping, budgeting, safety",
+        "Core values: integrity, teamwork, excellence in service and innovation",
+        "DVC: Dr. Eliab Seroney Some, Ph.D"
+      ]
+    },
+    {
+      "title": "Academic and Student Affairs Division",
+      "url": "https://kemu.ac.ke/academic-and-student-affairs-division",
+      "summary": "The Deputy Vice Chancellor (Academic and Student Affairs) heads the academic affairs division of the university, which coordinates Academic Policies and Procedures, Academic Planning and Development, Academic Programmes, Research and Extension, Examinations, Library and Information services, and Development of Academic facilities. The division ensures the quality and effectiveness of academic programs and student services across all campuses. Currently led by Dr. Evans Mwiti, Ph.D as DVC.",
+      "details": [
+        "Coordinates Academic Policies and Procedures",
+        "Academic Planning and Development",
+        "Academic Programmes",
+        "Research and Extension",
+        "Examinations",
+        "Library and Information services",
+        "Development of Academic facilities",
+        "DVC: Dr. Evans Mwiti, Ph.D"
+      ]
+    }
+  ],
+  "schools": [
+    {
+      "title": "School of Computing and Informatics",
+      "url": "https://kemu.ac.ke/school-of-computing-and-informatics",
+      "summary": "The School of Computing and Informatics at Kenya Methodist University offers programmes in computer science, information technology, and related computing fields. The school provides education and training in modern computing technologies and informatics.",
+      "details": []
+    },
+    {
+      "title": "School of Science and Technology",
+      "url": "https://kemu.ac.ke/school-of-science-and-technology",
+      "summary": "The School of Science and Technology at Kenya Methodist University offers programmes in science, technology, agriculture, and related fields. The school provides education and training in modern scientific and technological disciplines.",
+      "details": []
+    },
+    {
+      "title": "School of Education and Social Sciences",
+      "url": "https://kemu.ac.ke/school-of-education-and-social-sciences",
+      "summary": "The School of Education and Social Sciences at Kenya Methodist University offers programmes in education, social sciences, counselling psychology, and related fields. The school prepares students for careers in teaching, counselling, and social services.",
+      "details": []
+    },
+    {
+      "title": "School of Business and Economics",
+      "url": "https://kemu.ac.ke/school-of-business-and-economics",
+      "summary": "KeMU Business School (School of Business and Economics) offers business and economics programmes at various levels. The school provides education in business administration, finance, economics, hospitality and tourism management, and international relations.",
+      "details": []
+    },
+    {
+      "title": "School of Medicine and Health Sciences",
+      "url": "https://kemu.ac.ke/school-of-medicine-and-health-sciences",
+      "summary": "The School of Medicine and Pharmacy (also referred to as School of Medicine and Health Sciences) at Kenya Methodist University offers medical and health sciences programmes. KeMU is the first and only private university in Kenya to graduate medical doctors. The school offers programmes in medicine, nursing, public health, nutrition, and health systems management.",
+      "details": [
+        "First and only private university in Kenya to graduate medical doctors",
+        "Programmes in medicine, nursing, public health, nutrition, and health systems management"
+      ]
+    },
+    {
+      "title": "School of Health Sciences",
+      "url": "https://kemu.ac.ke/school-of-health-sciences",
+      "summary": "The School of Health Sciences at Kenya Methodist University offers health-related academic programs. The school is part of KeMU's commitment to producing healthcare professionals and contributing to the health sector in Kenya and beyond.",
+      "details": []
+    },
+    {
+      "title": "School of Economics and Political Sciences",
+      "url": "https://kemu.ac.ke/school-of-economics-and-political-sciences",
+      "summary": "The School of Economics and Political Sciences at Kenya Methodist University offers programs in economics and political science. The school provides education in these fields to prepare students for careers in economics, public policy, governance, and related areas.",
+      "details": []
+    },
+    {
+      "title": "Center for Leadership and Professional Development",
+      "url": "https://kemu.ac.ke/center-for-leadership-and-professional-development",
+      "summary": "The Center for Leadership and Professional Development at Kenya Methodist University provides leadership training and professional development programs. The center supports the university's mission of producing transformational leaders through various training and development initiatives.",
+      "details": []
+    }
+  ],
+  "programmes": {
+    "certificate": [
+      {
+        "title": "Certificate Programmes",
+        "url": "https://kemu.ac.ke/certificate-programmes",
+        "summary": "Kenya Methodist University offers various certificate programmes including Certificate in Church Ministry, Certificate in Church Music, Certificate in Food and Beverage, Certificate in Music and Instrument Operation, Certificate in Records and Archives Management, Certificate in Sign Language, and Certificate in Theology. Applications are accepted for January, May, or September intakes.",
+        "details": [
+          "Certificate in Church Ministry",
+          "Certificate in Church Music",
+          "Certificate in Food and Beverage",
+          "Certificate in Music and Instrument Operation",
+          "Certificate in Records and Archives Management",
+          "Certificate in Sign Language",
+          "Certificate in Theology",
+          "Intakes: January, May, September"
+        ]
+      }
+    ],
+    "diploma": [
+      {
+        "title": "Diploma Programmes",
+        "url": "https://kemu.ac.ke/diploma-programmes",
+        "summary": "Kenya Methodist University offers various diploma programmes across different schools and faculties. Diploma programmes typically take 2-3 years to complete and provide intermediate-level education between certificate and degree levels. Applications are accepted for January, May, or September intakes.",
+        "details": [
+          "Diploma programmes typically 2-3 years duration",
+          "Intermediate level between certificate and degree programmes",
+          "Intakes: January, May, September"
+        ]
+      }
+    ],
+    "degree": [
+      {
+        "title": "Degree Programmes",
+        "url": "https://kemu.ac.ke/degree-programmes",
+        "summary": "Overview of undergraduate degree programmes offered at Kenya Methodist University. The university offers a wide range of bachelor's degree programmes across various schools and faculties.",
+        "details": []
+      }
+    ],
+    "masters": [
+      {
+        "title": "Masters Programmes",
+        "url": "https://kemu.ac.ke/masters-programmes",
+        "summary": "Kenya Methodist University offers a comprehensive range of Masters programmes across various schools including Master of Arts in Counselling Psychology, Master of Arts in Mission Studies, Master of Arts in Religious Studies, Master of Business Administration, Master of Education in Leadership and Education Management, Master of Information Science, Master of Public Health, Master of Science in Agricultural and Rural Development, Master of Science in Computer Information Systems, Master of Science in Finance and Investment, Master of Science in Health Systems Management, Master of Science in Hospitality and Tourism Management, Master of Science in Human Nutrition and Dietetics, Master of Science in Nursing Education, and Masters in International Relations. Applications are accepted for January, May, or September intakes.",
+        "details": [
+          "Master of Arts in Counselling Psychology",
+          "Master of Arts in Mission Studies",
+          "Master of Arts in Religious Studies",
+          "Master of Business Administration (MBA)",
+          "Master of Education in Leadership and Education Management",
+          "Master of Information Science",
+          "Master of Public Health",
+          "Master of Science in Agricultural and Rural Development",
+          "Master of Science in Computer Information Systems",
+          "Master of Science in Finance and Investment",
+          "Master of Science in Health Systems Management",
+          "Master of Science in Hospitality and Tourism Management",
+          "Master of Science in Human Nutrition and Dietetics",
+          "Master of Science in Nursing Education",
+          "Masters in International Relations (MIR)",
+          "Intakes: January, May, September"
+        ]
+      }
+    ],
+    "postgraduate_diploma": [
+      {
+        "title": "Postgraduate Diploma Programmes",
+        "url": "https://kemu.ac.ke/postgraduate-diploma-programmes",
+        "summary": "Kenya Methodist University offers postgraduate diploma programmes including Postgraduate Diploma in Chaplaincy, Postgraduate Diploma in Education, and Postgraduate Diploma in Pedagogy. These programmes are designed for professionals seeking advanced training in specialized fields. Applications are accepted for January, May, or September intakes.",
+        "details": [
+          "Postgraduate Diploma in Chaplaincy",
+          "Postgraduate Diploma in Education",
+          "Postgraduate Diploma in Pedagogy",
+          "Intakes: January, May, September"
+        ]
+      }
+    ],
+    "doctorate": [
+      {
+        "title": "Doctorate Programmes",
+        "url": "https://kemu.ac.ke/doctorate-programmes",
+        "summary": "Kenya Methodist University offers Doctor of Philosophy (PhD) programmes across various schools including Doctor of Philosophy in Agriculture, Doctor of Philosophy in Business Administration and Management, Doctor of Philosophy in Counselling Psychology, Doctor of Philosophy in Education Leadership and Management, Doctor of Philosophy in Health Systems Management, and Doctor of Philosophy in Religious Studies. These programmes are designed for advanced research and academic excellence. Applications are accepted for January, May, or September intakes.",
+        "details": [
+          "Doctor of Philosophy in Agriculture",
+          "Doctor of Philosophy in Business Administration and Management",
+          "Doctor of Philosophy in Counselling Psychology",
+          "Doctor of Philosophy in Education Leadership and Management",
+          "Doctor of Philosophy in Health Systems Management",
+          "Doctor of Philosophy in Religious Studies",
+          "Intakes: January, May, September"
+        ]
+      }
+    ],
+    "professional_courses": [
+      {
+        "title": "Professional Courses",
+        "url": "https://kemu.ac.ke/professional-courses",
+        "summary": "Kenya Methodist University offers professional courses designed for working professionals and individuals seeking specialized skills and certifications. These courses provide practical, industry-relevant training to enhance career prospects and professional development.",
+        "details": []
+      }
+    ],
+    "tvet": [
+      {
+        "title": "KeMU TVET Institute",
+        "url": "https://kemu.ac.ke/kemu-tvet-institute",
+        "summary": "KeMU TVET Institute is an Approved and Licensed Training Institute by TVET Authority (Registration Number: TVETA/PRIVATE/TVC/0042/2021AI). The institute's vision is to be a Centre of excellence in Competence Based Education and Training providing Holistic nurturing to inspire innovation and self-reliance. The mission is to provide quality Competency Based Education and Training that recognizes and nurtures the potential of each learner towards achieving higher standards of Excellence. The motto is 'Dreams are still valid.' The institute offers Diploma Courses (Level 6), Craft Certificate Courses (Level 5), Artisan Certificate Courses (Level 4), and Professional Short Courses. Diploma courses include Accountancy, Business Management, Project Management, Human Resource Management, Procurement & Supplies Management, ICT Technician, Library and Information Science, Social Work and Community Development, Community Health, Agricultural Extension, Horticulture Production and Processing, Food and Beverage Sales and Services, Human Nutrition & Dietitics, Tourism and Travel Management, Criminial Justice & Security management, Counselling Psychology, and Maritime Transport and Logistics (KMA Approved). Craft Certificate courses include Business Management, ICT Technician, Records and Archives Management, Social Work and Community Development, Community Health, Horticulture Production, Food and Beverage Sales and Services, Tourism and Travel Management, International Relations, Kenyan Sign language, and Maritime Transport and Logistics (KMA Approved). Artisan certificate courses include Office assistance. Professional Short Courses include CDL, CISCO (CCNA 1,2,3,4), Kenyan Sign Language (KSL), Foreign Languages (French, German), Music (Keyboard, Guitar, Set Drums, and Vocals), and KASNEB courses.",
+        "details": [
+          "TVET Authority Registration: TVETA/PRIVATE/TVC/0042/2021AI",
+          "Vision: Centre of excellence in Competence Based Education and Training",
+          "Mission: Quality Competency Based Education and Training",
+          "Motto: Dreams are still valid",
+          "Diploma Courses (Level 6): Accountancy, Business Management, Project Management, Human Resource Management, Procurement & Supplies Management, ICT Technician, Library and Information Science, Social Work and Community Development, Community Health, Agricultural Extension, Horticulture Production and Processing, Food and Beverage Sales and Services, Human Nutrition & Dietitics, Tourism and Travel Management, Criminial Justice & Security management, Counselling Psychology, Maritime Transport and Logistics (KMA Approved)",
+          "Craft Certificate Courses (Level 5): Business Management, ICT Technician, Records and Archives Management, Social Work and Community Development, Community Health, Horticulture Production, Food and Beverage Sales and Services, Tourism and Travel Management, International Relations, Kenyan Sign language, Maritime Transport and Logistics (KMA Approved)",
+          "Artisan Certificate Courses (Level 4): Office assistance",
+          "Professional Short Courses: CDL, CISCO (CCNA 1,2,3,4), Kenyan Sign Language (KSL), Foreign Languages (French, German), Music (Keyboard, Guitar, Set Drums, and Vocals), KASNEB courses"
+        ]
+      }
+    ]
+  },
+  "directorates": [
+    {
+      "title": "Directorate of Research and Innovation",
+      "url": "https://kemu.ac.ke/directorate-of-research-and-innovation/",
+      "summary": "The Directorate of Research, Community Outreach and Industry Linkages is mandated to coordinate all research activities in the University, fundraise for research activities, coordinate grant writing activities, and disseminate scientific research through the International Journal of Professional Publication (IJPP) and annual scientific conferences. The directorate supports students and staff members to improve their research skills through continuous capacity building. Academic staff are engaged in research activities in thematic areas including Business, Health Sciences, Social Sciences, Religious studies, Mathematics, Agriculture and Food Security, Microbiology and Molecular Biology, Ecology, Education, Organic and applied Chemistry, Energy, and Climate Change. The directorate is led by Dr. Job Mapesa, Ph.D as Director.",
+      "details": [
+        "Coordinates all university research activities",
+        "Fundraises for research and coordinates grant writing",
+        "Disseminates research through International Journal of Professional Publication (IJPP) and annual scientific conferences",
+        "Provides capacity building for students and staff research skills",
+        "Research areas: Business, Health Sciences, Social Sciences, Religious studies, Mathematics, Agriculture and Food Security, Microbiology and Molecular Biology, Ecology, Education, Organic and applied Chemistry, Energy, Climate Change",
+        "Director: Dr. Job Mapesa, Ph.D"
+      ]
+    },
+    {
+      "title": "Directorate of Quality Assurance and Performance",
+      "url": "https://kemu.ac.ke/directorate-of-quality-assurance-and-performance",
+      "summary": "The Directorate of Quality Assurance and Quality Management systems is charged with systematically and logically monitoring and evaluating programs and processes in the University to ensure they meet specific requirements. The Directorate develops and implements institutional QA frameworks, facilitates QA trainings, offers advisories on quality issues, coordinates quality audits and monitoring activities (internal and external), and serves as the link between the institution and QA regulatory bodies and government agencies. The Directorate has continuously ensured that University products and services exceptionally surpass set standards, creating a culture of evidence-based decision making and teamwork. Achievements include automating class attendance tools, automating evaluation of teaching and learning tools, and embarking on ISO 9001:2015 certification processes. Currently led by Dr. Esther Thuba, Ph.D as Director.",
+      "details": [
+        "Monitors and evaluates programs and processes",
+        "Develops and implements institutional QA frameworks",
+        "Facilitates QA trainings",
+        "Coordinates quality audits (internal and external)",
+        "Serves as link to QA regulatory bodies and government agencies",
+        "Processes related to programme development, approval, accreditation, evaluation, reviews",
+        "Achievements: automated class attendance tools, automated evaluation tools, ISO 9001:2015 certification processes",
+        "Director: Dr. Esther Thuba, Ph.D"
+      ]
+    },
+    {
+      "title": "Directorate of University Advancement and Marketing",
+      "url": "https://kemu.ac.ke/directorate-of-university-advancement-and-marketing",
+      "summary": "The Directorate of Corporate Communication, Marketing and Alumni Coordination (DCCMA) serves all of KeMU's audiences as a collaborative partner and liaison office for enhancing University communications, engagement, marketing, community involvement and reputation. The Advancement Office is charged with resource mobilization for the University, establishing an endowment fund and taking lead in Public Private Partnership. The directorate communicates achievements and opportunities for students, faculty, staff, and programs, upholds the University brand through coordinated marketing and advertising, broadcasts corporate communications, publishes content, cultivates media partnerships, and provides direction and support for social media platforms. Currently led by Dr. Rosemary Kirambia as Director.",
+      "details": [
+        "Enhances University communications, engagement, marketing, community involvement and reputation",
+        "Resource mobilization for the University",
+        "Establishes endowment fund",
+        "Leads Public Private Partnership initiatives",
+        "Communicates achievements and opportunities",
+        "Upholds University brand through marketing and advertising",
+        "Broadcasts corporate communications and publishes content",
+        "Cultivates media partnerships",
+        "Provides direction and support for social media platforms",
+        "Director: Dr. Rosemary Kirambia"
+      ]
+    }
+  ],
+  "student_services": [
+    {
+      "title": "Student Welfare",
+      "url": "https://kemu.ac.ke/student-welfare",
+      "summary": "Student Welfare services at Kenya Methodist University provide support and resources for student well-being, including guidance, counselling, and assistance with various student needs throughout their academic journey.",
+      "details": []
+    },
+    {
+      "title": "Student Leadership",
+      "url": "https://kemu.ac.ke/student-leadership",
+      "summary": "The KeMU student fraternity annually elects a leadership to articulate their interests. The University management is keen on mentoring the student governance into a model leadership and constantly engages with student leaders. The Student Council includes positions such as President, Academic Secretary, Secretary General, Treasurer, Accommodation, Catering and External Affairs Secretary, and Sports, Clubs and Entertainment Secretary. Leadership positions exist at all three campuses (Main Campus, Nairobi Campus, and Mombasa Campus). The current Main Campus leadership includes Masai Naomi Chebet as President, Tony Owino as Academic Secretary, Kisero Kennedy as Secretary General, Hannan Kassim as Treasurer, Ebenezer Chepkemoi as Accommodation, Catering and External Affairs Secretary, and Abdulwahab Adan as Sports, Clubs and Entertainment Secretary.",
+      "details": [
+        "Student leadership elected annually",
+        "University management mentors student governance",
+        "Main Campus positions: President, Academic Secretary, Secretary General, Treasurer, Accommodation/Catering/External Affairs Secretary, Sports/Clubs/Entertainment Secretary",
+        "Nairobi Campus: Chairperson, Academics Secretary, Treasurer, Sports/Clubs/Entertainment Secretary",
+        "Mombasa Campus: Chairperson, Sports/Clubs/Entertainment Secretary, Treasurer",
+        "Current Main Campus President: Masai Naomi Chebet"
+      ]
+    },
+    {
+      "title": "Guidance and Counselling",
+      "url": "https://kemu.ac.ke/guidance-and-counselling",
+      "summary": "The well-being of students is taken very seriously at Kenya Methodist University. Across all campuses, welfare, chaplaincy and counseling services are available, managed by highly qualified staff. The counselling center works closely with students, Peer Counsellors, the Dean of Students, Academic Affairs Division, Health Clinic, Security, Clubs, Sports Tutor/Sports Groups, and Academic Departments, as well as external partners, government and non-governmental organizations, and corporates. The vision is to become a trusted, visible and inclusive University Counselling Center that continually strives to enhance the mental health and overall well-being of students and the larger university community. The mission is to support the university vision by creating an environment that promotes student growth and development through direct counselling services, psycho-education and awareness programmes. Services include confidential counselling, specialized therapeutic assistance for academic challenges and mental health issues, consultation, prevention services, and outreach. All counselling sessions are confidential unless there is a proven threat to life.",
+      "details": [
+        "Services available at all campuses (Main, Nairobi, Mombasa)",
+        "Vision: Trusted, visible and inclusive counselling center enhancing mental health and well-being",
+        "Mission: Promote student growth through counselling, psycho-education and awareness programmes",
+        "Services: Confidential counselling, therapeutic assistance, consultation, prevention, outreach",
+        "Collaborates with: Peer Counsellors, Dean of Students, Academic Affairs, Health Clinic, Security, Clubs, Sports, Academic Departments, external partners",
+        "Nairobi Campus counsellors: Rev. Gregory Kivanguli, Anastasia Muriithi, Dr. Zipporah Kaaria",
+        "Main Campus counsellors: Kenneth Gitiye (Team Lead), Jane Marete, Dr. Monica Gitonga, Dr. Peter Mwiti, Dr. Rebecca Wachira",
+        "Toll-free partner lines: Child Line Kenya (116), RedCross GBV/Crisis (1199), Niskize Suicide Prevention (0900620800), NACADA Drugs/Substance Abuse (1192)",
+        "All information shared during counselling is CONFIDENTIAL (unless proven threat to life)"
+      ]
+    },
+    {
+      "title": "Student Life",
+      "url": "https://kemu.ac.ke/student-life",
+      "summary": "A student of Kenya Methodist University is exposed to a variety of curricula and extra-curricula activities. The university provides sports and recreational programmes, health services, clubs and societies, accommodation facilities, cultural festivals, and student leadership opportunities. Sports disciplines include Soccer, Netball, Basketball, Volleyball, Rugby, Handball, Lawn Tennis, Table Tennis, Badminton, Karate, Taekwondo, Swimming, Chess, Scrabble and Hockey. The Sports and Games Department provides high-quality sporting and recreational services for all students and staff. The Department of Health Service offers Outpatient Services, Preventive Health Services, Curative Services, Promotive Health Services, Referral Services, and Observations. Students can join and form clubs to pursue their passions and explore new interests. All hostels are Wi-Fi enabled. The Cultural Festival includes the Mr. and Miss KeMU beauty pageant. The goal is to produce the next generation of professional and transformational leaders who will inspire positive change in society.",
+      "details": [
+        "Sports disciplines: Soccer, Netball, Basketball, Volleyball, Rugby, Handball, Lawn Tennis, Table Tennis, Badminton, Karate, Taekwondo, Swimming, Chess, Scrabble, Hockey",
+        "Health Services: Outpatient, Preventive, Curative, Promotive, Referral Services, Observations",
+        "Clubs and Societies available for all interests",
+        "Accommodation: All hostels Wi-Fi enabled",
+        "Cultural Festival: Features Mr. and Miss KeMU beauty pageant",
+        "Student Leadership: Annual elections for student governance",
+        "Recreational activities: Curricula and co-curricula activities for holistic development"
+      ]
+    },
+    {
+      "title": "Scholarships",
+      "url": "https://kemu.ac.ke/scholarships",
+      "summary": "Kenya Methodist University offers the 'Bless to Bless' scholarship program, providing a variety of scholarships and fellowships designed to help students and their families pay for university. Scholarships and grants are types of gift aid that do not have to be repaid. Requirements include being a full-time student (at least 12 points), applying for financial aid on time, meeting Satisfactory Academic Progress standards, and having approximately the same amount of financial need as in prior years. The scholarship office is open Monday through Friday from 8am to 5pm, except on holidays.",
+      "details": [
+        "Bless to Bless scholarship program",
+        "Scholarships and grants are gift aid that do not have to be repaid",
+        "Requirements: Full-time student (at least 12 points), timely financial aid application, meeting Satisfactory Academic Progress standards",
+        "Office hours: Monday-Friday, 8am-5pm (except holidays)",
+        "Contact: P.O. Box 267-60200 Meru, P.O. Box 45240-00100 Nairobi, P.O. Box 89983-80100 Mombasa",
+        "Phone: +254724256162",
+        "Email: info@kemu.ac.ke"
+      ]
+    },
+    {
+      "title": "Student Announcements",
+      "url": "https://kemu.ac.ke/student-welfare/student-announcements",
+      "summary": "The Student Announcements page provides important updates and information for students at Kenya Methodist University. Announcements include graduation lists, examination results, HELB allocation updates, online examination application links, and other student-related notices. Students are encouraged to regularly check this page for the latest information.",
+      "details": [
+        "Graduation lists and announcements",
+        "Examination results and provisional results",
+        "HELB allocation updates",
+        "Online examination application links",
+        "Other student-related notices and updates"
+      ]
+    },
+    {
+      "title": "Timetables",
+      "url": "https://kemu.ac.ke/timetables",
+      "summary": "The Timetables page provides access to study timetables and examination timetables for students at Kenya Methodist University. The Academic Registry manages and publishes class schedules, examination schedules, and other time-related academic information. Students can access timetables for all campuses (Meru, Nairobi, Mombasa) and for various academic programmes. The page also provides links to registration, student forms, graduation information, and the academic calendar.",
+      "details": [
+        "Study timetables for all programmes",
+        "Examination timetables",
+        "Managed by Academic Registry",
+        "Available for all campuses (Meru, Nairobi, Mombasa)",
+        "Links to registration, student forms, graduation, academic calendar"
+      ]
+    },
+    {
+      "title": "Graduation",
+      "url": "https://kemu.ac.ke/graduation",
+      "summary": "Students are conferred with academic honours upon successful completion of their programmes during an event known as graduation. Graduation is done once per year as per the academic calendar. Students must show intention to graduate by filling the intent to graduate form, meet all academic programme requirements (required credit hours, core courses, common courses, and electives), fill the final year clearance form, and fully pay the graduation fee. The university provides graduation forms, graduation lists (provisional and official), graduation booklets, graduation themes, and graduation announcements.",
+      "details": [
+        "Graduation done once per year as per academic calendar",
+        "Intent to Graduate Form required",
+        "Must meet academic programme requirements (credit hours, core courses, common courses, electives)",
+        "Final Year Clearance Form required",
+        "Graduation fee must be fully paid",
+        "Forms available: Intent to Graduate, Final Year Clearance",
+        "Graduation Lists: Provisional and Official",
+        "Graduation Booklets and Themes available",
+        "25th Graduation Ceremony scheduled"
+      ]
+    },
+    {
+      "title": "Graduation Booklets",
+      "url": "https://kemu.ac.ke/graduation-booklets",
+      "summary": "Graduation booklets are provided by Kenya Methodist University for each graduation ceremony. These booklets contain information about the graduating class, ceremony details, and other relevant graduation information.",
+      "details": []
+    },
+    {
+      "title": "Graduation Announcements",
+      "url": "https://kemu.ac.ke/graduation-announcements",
+      "summary": "The Graduation Announcements page provides information about upcoming graduation ceremonies, final graduation lists, ceremony notices, and other graduation-related announcements. Recent announcements include the 25th Graduation Ceremony Notice and the 2025 Final Graduation List. The page also provides links to graduation forms, graduation lists (provisional and official), graduation booklets, and graduation themes.",
+      "details": [
+        "25th Graduation Ceremony Notice",
+        "2025 Final Graduation List",
+        "Links to graduation forms: Intent to Graduate, Final Year Clearance",
+        "Graduation Lists: Provisional and Official",
+        "Graduation Booklets and Themes available"
+      ]
+    }
+  ],
+  "admissions": [
+    {
+      "title": "Apply to KeMU",
+      "url": "https://kemu.ac.ke/apply-to-kemu",
+      "summary": "Application portal for Kenya Methodist University. The page provides access to the online admissions system where prospective students can submit their applications for various programmes offered at the university.",
+      "details": [
+        "Online admissions portal: https://admissions.kemu.ac.ke/"
+      ]
+    },
+    {
+      "title": "KUCCPS",
+      "url": "https://kemu.ac.ke/kuccps",
+      "summary": "The Kenya Universities and Colleges Central Placement Service (KUCCPS) page provides information about the centralized placement service for students seeking admission to universities and colleges in Kenya. KeMU participates in the KUCCPS placement system for student admissions.",
+      "details": []
+    },
+    {
+      "title": "International Students",
+      "url": "https://kemu.ac.ke/international-students",
+      "summary": "Kenya Methodist University welcomes international students and provides information and support services for students from outside Kenya who wish to study at the university. The page contains admission information and requirements for international applicants.",
+      "details": []
+    },
+    {
+      "title": "Enquiry",
+      "url": "https://kemu.ac.ke/enquiry",
+      "summary": "The Enquiry page at Kenya Methodist University provides a contact form or inquiry system for prospective students, current students, parents, and other stakeholders to submit questions, requests for information, or general inquiries about the university's programs, admissions, services, or other matters.",
+      "details": []
+    }
+  ],
+  "events": [
+    {
+      "title": "Events",
+      "url": "https://kemu.ac.ke/events",
+      "summary": "Events calendar for Kenya Methodist University featuring upcoming and past university events including graduation ceremonies, medical camps, examination dates, and other academic and social activities. Events can be viewed in list, month, or day format.",
+      "details": [
+        "25th Graduation Ceremony - November 8, 2025 at KeMU Graduation Square",
+        "Free Medical Camp - June 26-28, 2024 at Main Campus",
+        "Examination Dates - Various trimesters throughout the academic year"
+      ]
+    },
+    {
+      "title": "2021 Graduation Ceremony",
+      "url": "https://kemu.ac.ke/event/2021-graduation-ceremony",
+      "summary": "The 2022 Graduation Ceremony was held on November 5, 2022, at KeMU Graduation Square in Kaaga, off Meru-Maua Highway. The ceremony featured the theme 'Enhancing Skills Based Education and Training for Sustainable Economic Development' and was streamed live on KTN Home, YouTube, and Facebook Live. The event ran from 8:00 AM to 5:00 PM and celebrated graduates who had completed their academic requirements.",
+      "details": [
+        "Date: November 5, 2022",
+        "Time: 8:00 AM - 5:00 PM",
+        "Venue: KeMU Graduation Square, Kaaga, off Meru-Maua Highway, Meru",
+        "Theme: Enhancing Skills Based Education and Training for Sustainable Economic Development",
+        "Live streaming available on KTN Home, YouTube, and Facebook Live"
+      ]
+    },
+    {
+      "title": "Live Stream",
+      "url": "https://kemu.ac.ke/live-stream",
+      "summary": "KeMU provides live streaming services for major university events including graduation ceremonies, conferences, and special occasions. The live stream page serves as a portal for accessing real-time broadcasts of university activities, allowing remote viewing for students, alumni, and the public who cannot attend events in person.",
+      "details": [
+        "Live streaming available for major university events",
+        "Accessible via KeMU website",
+        "Includes graduation ceremonies, conferences, and special events"
+      ]
+    }
+  ],
+  "news": [
+    {
+      "title": "Blog",
+      "url": "https://kemu.ac.ke/blog",
+      "summary": "KeMU blog page featuring news articles, announcements, and updates from Kenya Methodist University. The blog provides information about university events, academic achievements, student activities, and other important announcements.",
+      "details": []
+    },
+    {
+      "title": "Alumni",
+      "url": "https://kemu.ac.ke/alumni",
+      "summary": "The Kenya Methodist University Alumni Association (KeMU-AA) is a dynamic, diverse, and empowered community of graduates who embody excellence, service, and innovation. Established to unite alumni from all walks of life, the Association plays a vital role in strengthening lifelong relationships, promoting professional growth, and advancing the vision of Kenya Methodist University. With members across Kenya, Africa, and the world, KeMU-AA stands as a network of innovators, leaders, entrepreneurs, scholars, changemakers, and community builders. The Association's guiding philosophy is 'Laborare est Orare — To Work is to Pray.' The mission is to cultivate a proactive and engaged alumni community that contributes to member development, supports KeMU's mission, and creates meaningful impact through mentorship, collaboration, innovation, and service. The vision is to be a globally recognized alumni community that inspires leadership, fosters excellence, and champions the advancement of KeMU and the communities served.",
+      "details": [
+        "Tagline: Connecting the Past, Empowering the Present, Inspiring the Future",
+        "Philosophy: Laborare est Orare — To Work is to Pray",
+        "Pillars: Alumni Networking & Community Building, Mentorship & Career Advancement, Lifelong Learning & Personal Development, Giving Back & Philanthropy, Alumni Events & Celebrations, Partnerships & Collaboration",
+        "Membership open to: All KeMU graduates, former students (at least one academic year), current students (associate), staff and faculty alumni",
+        "Signature events: Annual Alumni Dinner, Homecoming & Campus Reconnect Tour, Alumni Awards & Recognition Night, Regional Chapter Meetups, Alumni Business Expo",
+        "Impact sectors: Education, Business and entrepreneurship, Healthcare, Governance and public service, Technology, Faith-based leadership, Community development"
+      ]
+    },
+    {
+      "title": "Careers",
+      "url": "https://kemu.ac.ke/careers",
+      "summary": "The Careers page at Kenya Methodist University provides information about job vacancies and employment opportunities at the university. The page links to current vacancies and career opportunities for prospective employees.",
+      "details": [
+        "Links to current job vacancies",
+        "Employment opportunities at KeMU"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "title": "KeMU TI Flier",
+      "url": "https://kemu.ac.ke/wp-content/uploads/2024/01/updated-KeMU-TI-Flier.pdf",
+      "summary": "The KeMU TI Flier is a downloadable PDF document providing information about Kenya Methodist University's programs, facilities, and offerings. The flier serves as a promotional and informational resource for prospective students and stakeholders.",
+      "details": []
+    },
+    {
+      "title": "Academic Calendar",
+      "url": "https://kemu.ac.ke/wp-content/uploads/academic%20calendar/doc19601720250423110237.pdf",
+      "summary": "The Academic Calendar is a downloadable PDF document outlining the academic year schedule for Kenya Methodist University. It includes important dates for registration, classes, examinations, holidays, and graduation ceremonies.",
+      "details": []
+    },
+    {
+      "title": "KeMU Academic Handbook 2023",
+      "url": "https://kemu.ac.ke/wp-content/uploads/2023/08/KeMU-Academic-Handbook-2023.pdf",
+      "summary": "The KeMU Academic Handbook 2023 is a comprehensive downloadable PDF document containing academic policies, procedures, regulations, and guidelines for students and staff at Kenya Methodist University. The handbook serves as a reference guide for academic matters.",
+      "details": []
+    },
+    {
+      "title": "2025 Certificate Collection Dates",
+      "url": "https://kemu.ac.ke/2025%20Certificate%20Collection%20Dates.pdf",
+      "summary": "The 2025 Certificate Collection Dates document is a downloadable PDF providing information about when and where students can collect their certificates after graduation or program completion. The document includes specific dates and locations for certificate collection.",
+      "details": []
+    },
+    {
+      "title": "IUCEA Undergraduate and Postgraduate Scholarship",
+      "url": "https://kemu.ac.ke/IUCEA%20UNDERGRADUATE%20AND%20POSTGRADUATE%20SCHOLARSHIP.pdf",
+      "summary": "The IUCEA (Inter-University Council for East Africa) Undergraduate and Postgraduate Scholarship document is a downloadable PDF providing information about scholarship opportunities available through IUCEA for undergraduate and postgraduate students at Kenya Methodist University.",
+      "details": []
+    },
+    {
+      "title": "KeMU DCCMA COMM",
+      "url": "https://kemu.ac.ke/KeMU-DCCMA-COMM-1-9.pdf",
+      "summary": "The KeMU DCCMA COMM document is a downloadable PDF from the Directorate of Corporate Communication, Marketing and Alumni Coordination. The document contains information about the directorate's communications, marketing activities, and alumni coordination efforts.",
+      "details": []
+    }
+  ],
+  "portals": [
+    {
+      "title": "Digital Campus",
+      "url": "https://kemu.ac.ke/digital-campus",
+      "summary": "The Directorate of Virtual and Blended Learning (DVBL) operates the KeMU Digital Campus, an eLearning platform using Canvas Learning Management System. The vision is to revolutionize the eLearning platform into a globally competitive Digital Campus that facilitates online teaching and learning while nurturing the next generation of professionals and visionary leaders. The Digital Campus provides an immersive and participative educational experience for distance-learning students who cannot attend traditional classes due to geographical constraints, work commitments, family responsibilities, disabilities, or by choice. Students sign in using their official KeMU email address. The directorate provides support for instructors in course design and delivery, and guidance for students in online learning. Currently led by Mrs. Jenu John as Director.",
+      "details": [
+        "Learning Management System: Canvas",
+        "Sign in URL: https://learn.kemu.ac.ke",
+        "Requires official KeMU email address",
+        "Password reset: Same as Gmail account password",
+        "ICT Support: ict.support@kemu.ac.ke",
+        "Instructor guidelines: Determine study mode, craft learning objectives, facilitate interactions, implement best practices",
+        "Student guidelines: Understand technical requirements, adhere to regulations, set learning goals, seek support",
+        "Director: Mrs. Jenu John"
+      ]
+    },
+    {
+      "title": "Student Portal",
+      "url": "https://students.kemu.ac.ke",
+      "summary": "The Student Portal is an online platform where students at Kenya Methodist University can access academic information, course registration, examination results, fee statements, timetables, and other student services. Students log in using their student credentials to access personalized information and services.",
+      "details": []
+    },
+    {
+      "title": "Staff Portal",
+      "url": "https://staff.kemu.ac.ke",
+      "summary": "The Staff Portal is an online platform where staff members at Kenya Methodist University can access employment information, payroll details, leave management, performance evaluations, and other staff-related services. Staff members log in using their staff credentials to access personalized information and services.",
+      "details": []
+    },
+    {
+      "title": "KeMU ICT Support Center",
+      "url": "https://helpdesk.kemu.ac.ke/index.php",
+      "summary": "The KeMU ICT Support Center is an online helpdesk system where students and staff can submit technical support requests, report IT issues, and access ICT-related assistance. The helpdesk system allows users to track their support tickets and receive assistance with technology-related problems, including issues with student portals, digital campus, email, and other ICT services.",
+      "details": []
+    }
+  ],
+  "contacts": [
+    {
+      "title": "Contact",
+      "url": "https://kemu.ac.ke/contact",
+      "summary": "Contact information for Kenya Methodist University including phone numbers, email addresses, postal addresses, and physical locations for all three campuses. The university operates main campus in Meru, Nairobi campus, and Mombasa campus. Support hotline is available 24 hours a day. Contact form available for queries.",
+      "details": [
+        "Phone (Monday-Friday 7AM-8PM): +(254)724-256162, +(254)117-260176",
+        "Mombasa Campus: +(254)743084019, +(254)748414998 (WhatsApp)",
+        "Email: info@kemu.ac.ke, customercare@kemu.ac.ke",
+        "Mombasa Campus Email: marketing.mombasa@kemu.ac.ke",
+        "Postal: P.O. Box 267-60200 Meru, P.O. Box 45240-00100 Nairobi, P.O. Box 89983-80100 Mombasa",
+        "Main Campus: Kaaga Off Meru-Maua Highway, Meru County",
+        "Nairobi Campus: KeMU Towers, University Way",
+        "Mombasa Campus: Opposite Buxton Point gate B, Narok Road, Buxton"
+      ]
+    },
+    {
+      "title": "Anonymous Reporting",
+      "url": "https://kemu.ac.ke/anonymous-reporting",
+      "summary": "The Anonymous Reporting system at Kenya Methodist University allows students, staff, and visitors to report security incidents, suspicious activities, or concerns anonymously. This system helps maintain campus safety and security by enabling confidential reporting of issues that may affect the university community.",
+      "details": []
+    },
+    {
+      "title": "KeMU Security Operations",
+      "url": "https://kemu.ac.ke/kemu-security-operations",
+      "summary": "KeMU Security Operations ensures, as far as is reasonably practicable, the security and safety of all students, staff, visitors and contractors whilst within or situated on university premises. Keeping the campus community safe is a top priority, addressing the most pressing safety and security concerns in and around the campus. Security and personal safety is everyone's responsibility. The Security Office is responsible for effective operation and enforcement of Security Policy and Procedures. Functions include supporting overall security management, managing security intelligence, conducting safety and security awareness training, conducting internal investigations, enforcing university policies and procedures, planning fire drills and emergency preparedness, supporting risk and disaster management, carrying out security risk surveys, and liaising with relevant stakeholders. The university uses CCTV surveillance in critical areas, manned 24/7 by security personnel. Contact: kemu.security@kemu.ac.ke",
+      "details": [
+        "Security and safety of students, staff, visitors, contractors",
+        "Security Operations: overall security management, security intelligence, awareness training, internal investigations, policy enforcement, fire drills, emergency preparedness, risk management, security surveys, stakeholder liaison",
+        "Security Incident Management: Report criminal activity, suspicious behavior to kemu.security@kemu.ac.ke",
+        "CCTV Surveillance: Deployed in critical areas, manned 24/7",
+        "Personal Safety Tips: Stay alert, avoid walking alone at night, walk in well-lit areas, avoid displaying valuables, know neighborhoods, carry wallets/purses securely",
+        "Lecture Hall and Office Safety: Lock doors and windows, manage keys properly, secure valuables, familiarize with fire evacuation plans, verify visitor identity",
+        "Contact: kemu.security@kemu.ac.ke"
+      ]
+    }
+  ]
+}
+

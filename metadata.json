@@ -1,0 +1,30 @@
+{
+  "name": "Kenya Methodist University",
+  "description": "A globally competitive Christian University producing the next generation of professional and transformational leaders. Chartered Christian University with campuses in Meru, Nairobi, and Mombasa offering PhD, Masters, Degree, Diploma, and Certificate programmes.",
+  "vision": "A globally competitive Christian University producing the next generation of professional and transformational leaders",
+  "campuses": [
+    {
+      "name": "Main Campus",
+      "location": "Kaaga Off Meru-Maua Highway, Meru County"
+    },
+    {
+      "name": "Nairobi Campus",
+      "location": "KeMU Towers, University Way"
+    },
+    {
+      "name": "Mombasa Campus",
+      "location": "Opposite Buxton Point gate B, Narok Road, Buxton"
+    }
+  ],
+  "contact": {
+    "phone": ["+(254) 724-256162", "+(254) 117-260176"],
+    "email": ["info@kemu.ac.ke", "customercare@kemu.ac.ke"],
+    "postal": [
+      "P.O. Box 267-60200 Meru, Kenya",
+      "P.O. Box 45240-00100 Nairobi, Kenya",
+      "P.O. Box 89983-80100 Mombasa, Kenya"
+    ]
+  },
+  "alumni": 32000,
+  "established": 2006
+}

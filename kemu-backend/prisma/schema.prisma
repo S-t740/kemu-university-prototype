@@ -1,0 +1,138 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model School {
+  id        Int       @id @default(autoincrement())
+  name      String
+  slug      String    @unique
+  overview  String?
+  programs  Program[]
+  createdAt DateTime  @default(now())
+}
+
+model Program {
+  id           Int      @id @default(autoincrement())
+  title        String
+  slug         String   @unique
+  degreeType   String
+  duration     String?
+  overview     String?
+  requirements String?
+  schoolId     Int
+  school       School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+}
+
+model News {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  summary     String?
+  content     String
+  images      String?  // JSON array of image URLs (up to 5)
+  author      String?
+  publishedAt DateTime @default(now())
+}
+
+model Event {
+  id         Int      @id @default(autoincrement())
+  title      String
+  date       DateTime
+  venue      String
+  details    String?
+  images     String?  // JSON array of image URLs (up to 5)
+  createdAt  DateTime @default(now())
+}
+
+model Vacancy {
+  id           Int           @id @default(autoincrement())
+  title        String
+  slug         String        @unique
+  department   String
+  location     String        // e.g., "Meru Campus", "Nairobi Campus", "All Campuses"
+  type         String        // e.g., "Academic", "Administrative", "Support Staff"
+  description  String
+  requirements String
+  deadline     DateTime
+  images       String?       // JSON-encoded array of image URLs
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  applications Application[]
+}
+
+model Application {
+  id          Int      @id @default(autoincrement())
+  vacancyId   Int
+  vacancy     Vacancy  @relation(fields: [vacancyId], references: [id], onDelete: Cascade)
+  firstName   String
+  lastName    String
+  email       String
+  phone       String
+  coverLetter String
+  cvPath      String   // Path to uploaded CV file
+  documents   String?  // JSON-encoded array of document paths
+  status      String   @default("pending") // pending, reviewing, shortlisted, interview, rejected, hired
+  adminNotes  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Inquiry {
+  id         Int      @id @default(autoincrement())
+  name       String
+  email      String
+  message    String
+  source     String   // "contact-form" or "chatbot"
+  createdAt  DateTime @default(now())
+  isRead     Boolean  @default(false)
+}
+
+model Admin {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  password  String
+  role      String    @default("admin")
+  createdAt DateTime  @default(now())
+}
+
+model Conversation {
+  id          Int       @id @default(autoincrement())
+  sessionId   String    @unique
+  userName    String?
+  userEmail   String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  isLogged    Boolean   @default(true)
+  messages    Message[]
+  source      String?   @default("chatbot_ai")
+  resolved    Boolean   @default(false)
+}
+
+model Message {
+  id             Int          @id @default(autoincrement())
+  conversationId Int
+  role           String       // 'user' | 'assistant' | 'system'
+  content        String
+  tokenCount     Int?
+  createdAt      DateTime     @default(now())
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+}
+
+model StudentService {
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique   // e.g., "welfare", "leadership", "counselling"
+  title       String              // Display title
+  summary     String              // Main description text
+  details     String?             // JSON array of detail points
+  url         String?             // External link if applicable
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
