@@ -10,7 +10,8 @@ import { NewsCard, PageHeader } from '../components';
 import { useFetch } from '../hooks/useFetch';
 
 const News: React.FC = () => {
-  const { data: news, loading, error } = useFetch<NewsItem[]>('/news');
+  // Exclude TVET news from main university news page
+  const { data: news, loading, error } = useFetch<NewsItem[]>('/news?excludeInstitution=TVET');
 
   return (
     <div className="bg-kemu-purple10 min-h-screen">

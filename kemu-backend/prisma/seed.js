@@ -302,6 +302,34 @@ async function main() {
   }
   console.log('✅ Student services created');
 
+  // Create directorates (from kemu_content.json)
+  const directorates = [
+    {
+      name: 'Directorate of Research and Innovation',
+      slug: 'directorate-research-innovation',
+      overview: 'The Directorate of Research, Community Outreach and Industry Linkages is mandated to coordinate all research activities in the University, fundraise for research activities, coordinate grant writing activities, and disseminate scientific research through the International Journal of Professional Publication (IJPP) and annual scientific conferences.'
+    },
+    {
+      name: 'Directorate of Quality Assurance',
+      slug: 'directorate-quality-assurance',
+      overview: 'The Directorate for Quality Assurance is mandated to coordinate all aspects of quality assurance in the university. The quality assurance directorate aims to enhance quality improvement processes and measures for teaching, learning, research, and other administrative services.'
+    },
+    {
+      name: 'Directorate of Marketing and Advancement',
+      slug: 'directorate-marketing-advancement',
+      overview: 'The Marketing and Advancement Directorate is mandated to undertake marketing and promotion of University programmes, promote the corporate image, maintain positive relationships with customers, and conduct market research to inform institutional planning.'
+    }
+  ];
+
+  for (const directorate of directorates) {
+    await prisma.directorate.upsert({
+      where: { slug: directorate.slug },
+      update: { name: directorate.name, overview: directorate.overview },
+      create: directorate
+    });
+  }
+  console.log('✅ Directorates created');
+
   console.log('✨ Seeding completed!');
 }
 

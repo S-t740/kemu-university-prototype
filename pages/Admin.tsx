@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { adminLogin, createProgram, createNews, updateProgram, updateNews, deleteProgram, deleteNews, getPrograms, getNews, getSchools, createSchool, updateSchool, deleteSchool, getEvents, createEvent, updateEvent, deleteEvent, getAllVacancies, createVacancy, updateVacancy, deleteVacancy, getInquiries, toggleInquiryRead, deleteInquiry } from '../services/api';
 import { DegreeType, Program, NewsItem, School, EventItem, Vacancy } from '../types';
-import { Trash2, Plus, LogOut, LayoutDashboard, Newspaper, GraduationCap, AlertCircle, Calendar, Edit, Building, Mail, MailOpen, Eye, X, Briefcase, Users } from 'lucide-react';
+import { Trash2, Plus, LogOut, LayoutDashboard, Newspaper, GraduationCap, AlertCircle, Calendar, Edit, Building, Mail, MailOpen, Eye, X, Briefcase, Users, Award, FileText } from 'lucide-react';
 import Modal from '../components/Modal';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { programSchema, newsSchema, loginSchema, schoolSchema, eventSchema, type ProgramFormData, type NewsFormData, type LoginFormData, type SchoolFormData, type EventFormData } from '../utils/validation';
@@ -12,7 +12,9 @@ import { InputField, DashboardCard, GlassSection, GoldButton } from '../componen
 import axios from 'axios';
 import ApplicationsManagement from '../components/ApplicationsManagement';
 import StudentServicesManagement from '../components/StudentServicesManagement';
-import { BookOpen } from 'lucide-react';
+import DirectoratesManagement from '../components/DirectoratesManagement';
+import CollapsibleSection from '../components/admin/CollapsibleSection';
+import { BookOpen, Lightbulb } from 'lucide-react';
 
 interface Inquiry {
   id: number;
@@ -31,7 +33,7 @@ const Admin: React.FC = () => {
   const [loginError, setLoginError] = useState<string>('');
   const [loginErrors, setLoginErrors] = useState<Record<string, string>>({});
 
-  const [activeTab, setActiveTab] = useState<'programs' | 'news' | 'schools' | 'events' | 'vacancies' | 'applications' | 'studentServices' | 'inbox'>('programs');
+  const [activeTab, setActiveTab] = useState<'programs' | 'news' | 'schools' | 'events' | 'vacancies' | 'applications' | 'studentServices' | 'directorates' | 'inbox'>('programs');
   const [programs, setPrograms] = useState<Program[]>([]);
   const [news, setNews] = useState<NewsItem[]>([]);
   const [schools, setSchools] = useState<School[]>([]);
@@ -55,7 +57,7 @@ const Admin: React.FC = () => {
   // Forms
   const [newProgram, setNewProgram] = useState<ProgramFormData>({
     title: '',
-    degreeType: DegreeType.Undergraduate,
+    degreeType: DegreeType.Degree,
     schoolId: '',
     duration: '',
     overview: ''
@@ -115,19 +117,21 @@ const Admin: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
+      // Exclude TVET content from main admin panel
       const [pData, nData, sData, eData, vData, iData] = await Promise.all([
         getPrograms(),
-        getNews(),
+        getNews({ excludeInstitution: 'TVET' }),
         getSchools(),
-        getEvents(),
-        getAllVacancies(),
+        getEvents({ excludeInstitution: 'TVET' }),
+        getAllVacancies(),  // Already filtered by ApplicationsManagement component
         getInquiries()
       ]);
       setPrograms(pData);
       setNews(nData);
       setSchools(sData);
       setEvents(eData);
-      setVacancies(vData);
+      // Filter vacancies to exclude TVET
+      setVacancies(vData.filter((v: any) => v.institution !== 'TVET'));
       setInquiries(iData);
     } catch (err) {
       setError(handleApiError(err));
@@ -305,7 +309,7 @@ const Admin: React.FC = () => {
       } else {
         await createProgram({ ...newProgram, slug });
       }
-      setNewProgram({ title: '', degreeType: DegreeType.Undergraduate, schoolId: '', duration: '', overview: '' });
+      setNewProgram({ title: '', degreeType: DegreeType.Degree, schoolId: '', duration: '', overview: '' });
       await refreshData();
     } catch (err) {
       setError(handleApiError(err));
@@ -793,6 +797,17 @@ const Admin: React.FC = () => {
           >
             <BookOpen size={18} className="mr-2" aria-hidden="true" /> Student Services
           </button>
+          <button
+            role="tab"
+            aria-selected={activeTab === 'directorates'}
+            onClick={() => setActiveTab('directorates')}
+            className={`flex items-center px-6 py-3 rounded-lg font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-kemu-purple focus:ring-offset-2 transition-all duration-200 ${activeTab === 'directorates'
+              ? 'bg-gradient-to-r from-kemu-gold to-kemu-purple text-white shadow-md'
+              : 'bg-transparent text-gray-600 hover:bg-gray-50 hover:text-kemu-gold'
+              }`}
+          >
+            <Lightbulb size={18} className="mr-2" aria-hidden="true" /> Directorates
+          </button>
         </div>
 
         {/* Quick Stats Overview */}
@@ -833,7 +848,7 @@ const Admin: React.FC = () => {
         </div>
 
         {/* Main Content Grid - Only show for non-applications and non-studentServices tabs */}
-        {activeTab !== 'applications' && activeTab !== 'studentServices' && (
+        {activeTab !== 'applications' && activeTab !== 'studentServices' && activeTab !== 'directorates' && (
           <div className="grid lg:grid-cols-3 gap-6">
             {/* Professional Form Section */}
             <div className="lg:col-span-1">
@@ -870,9 +885,12 @@ const Admin: React.FC = () => {
                         onChange={e => setNewProgram({ ...newProgram, degreeType: e.target.value as DegreeType })}
                         className="w-full bg-white/90 backdrop-blur-sm border-2 border-gray-200 p-3 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-kemu-gold focus:border-kemu-gold shadow-soft-3d transition-all"
                       >
-                        <option value={DegreeType.Undergraduate}>Undergraduate</option>
-                        <option value={DegreeType.Postgraduate}>Postgraduate</option>
                         <option value={DegreeType.Certificate}>Certificate</option>
+                        <option value={DegreeType.Diploma}>Diploma</option>
+                        <option value={DegreeType.Degree}>Degree</option>
+                        <option value={DegreeType.Masters}>Masters</option>
+                        <option value={DegreeType.PhD}>PhD</option>
+                        <option value={DegreeType.Postgraduate}>Postgraduate</option>
                       </select>
                     </div>
                     <div>
@@ -930,7 +948,7 @@ const Admin: React.FC = () => {
                       {programSubmitting ? (editMode.id ? 'Updating...' : 'Creating...') : (editMode.id ? 'Update Program' : 'Create Program')}
                     </GoldButton>
                     {editMode.id && (
-                      <button type="button" onClick={() => { setEditMode({ type: null, id: null }); setNewProgram({ title: '', degreeType: DegreeType.Undergraduate, schoolId: '', duration: '', overview: '' }); }} className="w-full mt-2 text-sm text-gray-500 hover:text-gray-700">Cancel Edit</button>
+                      <button type="button" onClick={() => { setEditMode({ type: null, id: null }); setNewProgram({ title: '', degreeType: DegreeType.Degree, schoolId: '', duration: '', overview: '' }); }} className="w-full mt-2 text-sm text-gray-500 hover:text-gray-700">Cancel Edit</button>
                     )}
                   </form>
                 ) : activeTab === 'news' ? (
@@ -1238,42 +1256,93 @@ const Admin: React.FC = () => {
                       <tbody className="bg-white divide-y divide-gray-100">
                         {activeTab === 'programs' ? (
                           programs.length > 0 ? (
-                            programs.map(p => (
-                              <tr key={p.id} className="hover:bg-kemu-purple10/30 transition-colors duration-150 border-b border-gray-50">
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                  <span className="text-sm font-mono text-gray-500 font-semibold">#{p.id}</span>
-                                </td>
-                                <td className="px-6 py-4">
-                                  <div className="flex flex-col">
-                                    <span className="text-sm font-semibold text-gray-900">{p.title}</span>
-                                    <span className="text-xs text-kemu-purple font-medium mt-1 inline-flex items-center">
-                                      <GraduationCap size={12} className="mr-1" />
-                                      {p.degreeType}
-                                    </span>
-                                  </div>
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-right">
-                                  <div className="flex items-center justify-end gap-2">
-                                    <button
-                                      onClick={() => handleEditClick('program', p)}
-                                      className="bg-blue-50 hover:bg-blue-100 text-blue-600 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200"
-                                      aria-label={`Edit program: ${p.title}`}
-                                      title="Edit"
+                            <tr>
+                              <td colSpan={3} className="p-0">
+                                {/* Collapsible sections by degree type */}
+                                {Object.values(DegreeType).map((degreeType) => {
+                                  const filteredPrograms = programs.filter(p => p.degreeType === degreeType);
+                                  if (filteredPrograms.length === 0) return null;
+
+                                  const getIconForDegree = (type: DegreeType) => {
+                                    switch (type) {
+                                      case DegreeType.Certificate: return <FileText size={18} className="text-green-600" />;
+                                      case DegreeType.Diploma: return <FileText size={18} className="text-blue-600" />;
+                                      case DegreeType.Degree: return <GraduationCap size={18} className="text-kemu-purple" />;
+                                      case DegreeType.Masters: return <Award size={18} className="text-kemu-gold" />;
+                                      case DegreeType.PhD: return <Award size={18} className="text-red-600" />;
+                                      case DegreeType.Postgraduate: return <GraduationCap size={18} className="text-kemu-blue" />;
+                                      default: return <GraduationCap size={18} className="text-gray-500" />;
+                                    }
+                                  };
+
+                                  const getColorForDegree = (type: DegreeType) => {
+                                    switch (type) {
+                                      case DegreeType.Certificate: return 'bg-green-600';
+                                      case DegreeType.Diploma: return 'bg-blue-600';
+                                      case DegreeType.Degree: return 'bg-kemu-purple';
+                                      case DegreeType.Masters: return 'bg-kemu-gold';
+                                      case DegreeType.PhD: return 'bg-red-600';
+                                      case DegreeType.Postgraduate: return 'bg-kemu-blue';
+                                      default: return 'bg-gray-500';
+                                    }
+                                  };
+
+                                  return (
+                                    <CollapsibleSection
+                                      key={degreeType}
+                                      title={degreeType}
+                                      count={filteredPrograms.length}
+                                      icon={getIconForDegree(degreeType)}
+                                      colorClass={getColorForDegree(degreeType)}
+                                      defaultOpen={false}
                                     >
-                                      <Edit size={16} aria-hidden="true" />
-                                    </button>
-                                    <button
-                                      onClick={() => handleDeleteClick('program', p.id, p.title)}
-                                      className="bg-red-50 hover:bg-red-100 text-red-600 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-200"
-                                      aria-label={`Delete program: ${p.title}`}
-                                      title="Delete"
-                                    >
-                                      <Trash2 size={16} aria-hidden="true" />
-                                    </button>
-                                  </div>
-                                </td>
-                              </tr>
-                            ))
+                                      <table className="w-full text-left">
+                                        <tbody className="bg-white divide-y divide-gray-100">
+                                          {filteredPrograms.map(p => (
+                                            <tr key={p.id} className="hover:bg-kemu-purple10/30 transition-colors duration-150 border-b border-gray-50">
+                                              <td className="px-6 py-4 whitespace-nowrap w-20">
+                                                <span className="text-sm font-mono text-gray-500 font-semibold">#{p.id}</span>
+                                              </td>
+                                              <td className="px-6 py-4">
+                                                <div className="flex flex-col">
+                                                  <span className="text-sm font-semibold text-gray-900">{p.title}</span>
+                                                  {p.school && (
+                                                    <span className="text-xs text-gray-500 mt-1 inline-flex items-center">
+                                                      <Building size={12} className="mr-1" />
+                                                      {p.school.name}
+                                                    </span>
+                                                  )}
+                                                </div>
+                                              </td>
+                                              <td className="px-6 py-4 whitespace-nowrap text-right">
+                                                <div className="flex items-center justify-end gap-2">
+                                                  <button
+                                                    onClick={() => handleEditClick('program', p)}
+                                                    className="bg-blue-50 hover:bg-blue-100 text-blue-600 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200"
+                                                    aria-label={`Edit program: ${p.title}`}
+                                                    title="Edit"
+                                                  >
+                                                    <Edit size={16} aria-hidden="true" />
+                                                  </button>
+                                                  <button
+                                                    onClick={() => handleDeleteClick('program', p.id, p.title)}
+                                                    className="bg-red-50 hover:bg-red-100 text-red-600 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-200"
+                                                    aria-label={`Delete program: ${p.title}`}
+                                                    title="Delete"
+                                                  >
+                                                    <Trash2 size={16} aria-hidden="true" />
+                                                  </button>
+                                                </div>
+                                              </td>
+                                            </tr>
+                                          ))}
+                                        </tbody>
+                                      </table>
+                                    </CollapsibleSection>
+                                  );
+                                })}
+                              </td>
+                            </tr>
                           ) : (
                             <tr>
                               <td colSpan={3} className="px-6 py-12 text-center">
@@ -1740,7 +1809,7 @@ const Admin: React.FC = () => {
         {/* Applications Tab - Standalone Full-Width Section */}
         {activeTab === 'applications' && (
           <div className="mt-6">
-            <ApplicationsManagement onRefreshData={refreshData} />
+            <ApplicationsManagement onRefreshData={refreshData} excludeInstitution="TVET" />
           </div>
         )}
 
@@ -1748,6 +1817,13 @@ const Admin: React.FC = () => {
         {activeTab === 'studentServices' && (
           <div className="mt-6">
             <StudentServicesManagement />
+          </div>
+        )}
+
+        {/* Directorates Tab - Standalone Full-Width Section */}
+        {activeTab === 'directorates' && (
+          <div className="mt-6">
+            <DirectoratesManagement />
           </div>
         )}
 

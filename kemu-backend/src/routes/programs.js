@@ -7,7 +7,7 @@ const router = express.Router();
 // Get all programs with filters
 router.get('/', async (req, res) => {
   try {
-    const { q, degree, schoolId } = req.query;
+    const { q, degree, schoolId, institution } = req.query;
 
     const where = {};
 
@@ -24,6 +24,10 @@ router.get('/', async (req, res) => {
 
     if (schoolId) {
       where.schoolId = parseInt(schoolId);
+    }
+
+    if (institution) {
+      where.institution = institution;
     }
 
     const programs = await prisma.program.findMany({
@@ -67,7 +71,7 @@ router.get('/:slug', async (req, res) => {
 // Create program (admin only)
 router.post('/', authenticate, async (req, res) => {
   try {
-    const { title, slug, degreeType, duration, overview, requirements, schoolId } = req.body;
+    const { title, slug, degreeType, duration, overview, requirements, schoolId, institution } = req.body;
 
     if (!title || !slug || !degreeType || !schoolId) {
       return res.status(400).json({ message: 'Title, slug, degreeType, and schoolId are required' });
@@ -81,7 +85,8 @@ router.post('/', authenticate, async (req, res) => {
         duration,
         overview,
         requirements,
-        schoolId: parseInt(schoolId)
+        schoolId: parseInt(schoolId),
+        institution: institution || 'University'
       },
       include: {
         school: true
@@ -102,7 +107,7 @@ router.post('/', authenticate, async (req, res) => {
 router.put('/:id', authenticate, async (req, res) => {
   try {
     const id = parseInt(req.params.id);
-    const { title, slug, degreeType, duration, overview, requirements, schoolId } = req.body;
+    const { title, slug, degreeType, duration, overview, requirements, schoolId, institution } = req.body;
 
     const program = await prisma.program.update({
       where: { id },
@@ -113,7 +118,8 @@ router.put('/:id', authenticate, async (req, res) => {
         duration,
         overview,
         requirements,
-        schoolId: schoolId ? parseInt(schoolId) : undefined
+        schoolId: schoolId ? parseInt(schoolId) : undefined,
+        institution: institution || undefined
       },
       include: {
         school: true

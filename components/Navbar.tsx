@@ -22,14 +22,17 @@ const Navbar: React.FC = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const location = useLocation();
 
-  const navItems: NavItem[] = [
+  // Check if we're on TVET pages
+  const isTVETContext = location.pathname.startsWith('/tvet');
+
+  // University navigation items
+  const universityNavItems: NavItem[] = [
     { name: 'Home', path: '/' },
     {
       name: 'About',
       items: [
         { name: 'About KeMU', path: '/about' },
-        { name: 'Management', path: '/about#management' },
-        { name: 'Student Welfare', path: '/about#student-welfare' }, // This might be redundant with Student Services now, keeping for safety
+        { name: 'Governance', path: '/about#governance' },
         { name: 'Student Services', path: '/about#students' }
       ]
     },
@@ -37,15 +40,39 @@ const Navbar: React.FC = () => {
       name: 'Academics',
       items: [
         { name: 'All Programmes', path: '/programmes' },
-        { name: 'Schools', path: '/schools' }
+        { name: 'Schools', path: '/schools' },
+        { name: 'TVET Institute', path: '/tvet' }
       ]
     },
     { name: 'News', path: '/news' },
     { name: 'Admissions', path: '/admissions' },
-    // { name: 'Students', path: '/students' }, // Removed
     { name: 'Careers', path: '/careers' },
+    {
+      name: 'Portals',
+      items: [
+        { name: 'Student Portal', path: '/portals#students' },
+        { name: 'Digital Campus', path: '/portals#digital-campus' },
+        { name: 'Staff Portal', path: '/portals#staff' },
+        { name: 'ICT Support', path: '/portals#ict-support' }
+      ]
+    },
     { name: 'Admin', path: '/admin' },
   ];
+
+  // TVET context navigation items
+  const tvetNavItems: NavItem[] = [
+    { name: 'TVET Home', path: '/tvet' },
+    { name: 'Programs', path: '/tvet/programs' },
+    { name: 'Admissions', path: '/tvet/admissions' },
+    { name: 'Careers', path: '/tvet/careers' },
+    { name: 'News', path: '/tvet/news' },
+    { name: 'About', path: '/tvet/about' },
+    { name: 'University Home', path: '/' },
+    { name: 'Admin', path: '/tvet/admin' },
+  ];
+
+  // Use appropriate nav items based on context
+  const navItems = isTVETContext ? tvetNavItems : universityNavItems;
 
   const isActive = (path: string) => location.pathname === path;
   const isDropdown = (item: NavItem): item is NavDropdown => 'items' in item;

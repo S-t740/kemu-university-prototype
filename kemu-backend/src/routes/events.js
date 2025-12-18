@@ -9,13 +9,27 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   try {
     const now = new Date();
+    const { institution, excludeInstitution } = req.query;
+
+    const where = {
+      date: {
+        gte: now
+      }
+    };
+
+    if (institution) {
+      where.institution = institution;
+    }
+
+    // Exclude events from a specific institution
+    if (excludeInstitution) {
+      where.NOT = {
+        institution: excludeInstitution
+      };
+    }
 
     const events = await prisma.event.findMany({
-      where: {
-        date: {
-          gte: now
-        }
-      },
+      where,
       orderBy: {
         date: 'asc'
       }
@@ -33,6 +47,7 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
 
 // Get event by ID
 router.get('/:id', async (req, res) => {
@@ -62,7 +77,7 @@ router.get('/:id', async (req, res) => {
 // Create event (admin only)
 router.post('/', authenticate, upload.array('images', 5), async (req, res) => {
   try {
-    const { title, date, venue, details } = req.body;
+    const { title, date, venue, details, institution } = req.body;
 
     if (!title || !date || !venue) {
       return res.status(400).json({ message: 'Title, date, and venue are required' });
@@ -77,7 +92,8 @@ router.post('/', authenticate, upload.array('images', 5), async (req, res) => {
         date: new Date(date),
         venue,
         details,
-        images: imageUrls.length > 0 ? JSON.stringify(imageUrls) : null
+        images: imageUrls.length > 0 ? JSON.stringify(imageUrls) : null,
+        institution: institution || 'University'
       }
     });
 

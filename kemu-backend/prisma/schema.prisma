@@ -26,6 +26,7 @@ model Program {
   requirements String?
   schoolId     Int
   school       School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  institution  String   @default("University") // "University" or "TVET"
   createdAt    DateTime @default(now())
 }
 
@@ -37,17 +38,19 @@ model News {
   content     String
   images      String?  // JSON array of image URLs (up to 5)
   author      String?
+  institution String   @default("University") // "University" or "TVET"
   publishedAt DateTime @default(now())
 }
 
 model Event {
-  id         Int      @id @default(autoincrement())
-  title      String
-  date       DateTime
-  venue      String
-  details    String?
-  images     String?  // JSON array of image URLs (up to 5)
-  createdAt  DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  title       String
+  date        DateTime
+  venue       String
+  details     String?
+  images      String?  // JSON array of image URLs (up to 5)
+  institution String   @default("University") // "University" or "TVET"
+  createdAt   DateTime @default(now())
 }
 
 model Vacancy {
@@ -61,6 +64,7 @@ model Vacancy {
   requirements String
   deadline     DateTime
   images       String?       // JSON-encoded array of image URLs
+  institution  String        @default("University") // "University" or "TVET"
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
   applications Application[]
@@ -135,4 +139,12 @@ model StudentService {
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model Directorate {
+  id        Int      @id @default(autoincrement())
+  name      String
+  slug      String   @unique
+  overview  String?
+  createdAt DateTime @default(now())
 }

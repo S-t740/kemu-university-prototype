@@ -1,7 +1,10 @@
 export enum DegreeType {
-  Undergraduate = 'Undergraduate',
-  Postgraduate = 'Postgraduate',
-  Certificate = 'Certificate'
+  Certificate = 'Certificate',
+  Diploma = 'Diploma',
+  Degree = 'Degree',
+  Masters = 'Masters',
+  PhD = 'PhD',
+  Postgraduate = 'Postgraduate'
 }
 
 export interface Program {
@@ -62,9 +65,11 @@ export interface Vacancy {
   requirements: string;
   deadline: string;
   images?: string[];
+  institution?: string;  // 'TVET' or 'MAIN' for filtering
   createdAt: string;
   updatedAt: string;
 }
+
 
 export type ApplicationStatus = 'pending' | 'reviewing' | 'shortlisted' | 'interview' | 'rejected' | 'hired';
 
@@ -91,4 +96,11 @@ export interface Stats {
   events: number;
   students: number;
   campuses: number;
+}
+
+export interface Directorate {
+  id: number;
+  name: string;
+  slug: string;
+  overview?: string;
 }

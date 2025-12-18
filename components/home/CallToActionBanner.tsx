@@ -47,7 +47,7 @@ const CallToActionBanner: React.FC = () => {
                             </Link>
 
                             <Link
-                                to="/programs"
+                                to="/programmes"
                                 className="group inline-flex items-center gap-2 px-10 py-5 bg-kemu-purple text-white rounded-xl font-bold text-lg shadow-deep-3d hover:shadow-glow-purple hover:scale-105 transition-all duration-300"
                             >
                                 <span>Explore Programs</span>

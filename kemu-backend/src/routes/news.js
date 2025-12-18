@@ -11,8 +11,22 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   try {
     const limit = req.query.limit ? parseInt(req.query.limit) : undefined;
+    const { institution, excludeInstitution } = req.query;
+
+    const where = {};
+    if (institution) {
+      where.institution = institution;
+    }
+
+    // Exclude news from a specific institution
+    if (excludeInstitution) {
+      where.NOT = {
+        institution: excludeInstitution
+      };
+    }
 
     const news = await prisma.news.findMany({
+      where,
       take: limit,
       orderBy: {
         publishedAt: 'desc'
@@ -31,6 +45,7 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
 
 // Get news by slug
 router.get('/:slug', async (req, res) => {
@@ -59,7 +74,7 @@ router.get('/:slug', async (req, res) => {
 // Create news (admin only)
 router.post('/', authenticate, upload.array('images', 5), async (req, res) => {
   try {
-    const { title, slug, summary, content, publishedAt } = req.body;
+    const { title, slug, summary, content, publishedAt, institution } = req.body;
 
     if (!title || !slug || !content) {
       return res.status(400).json({ message: 'Title, slug, and content are required' });
@@ -76,6 +91,7 @@ router.post('/', authenticate, upload.array('images', 5), async (req, res) => {
         content,
         images: imageUrls.length > 0 ? JSON.stringify(imageUrls) : null,
         author: req.body.author,
+        institution: institution || 'University',
         publishedAt: publishedAt ? new Date(publishedAt) : new Date()
       }
     });

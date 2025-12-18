@@ -7,7 +7,7 @@ export const programSchema = z.object({
     .string()
     .min(1, 'Title is required')
     .max(VALIDATION.MAX_TITLE_LENGTH, `Title must be less than ${VALIDATION.MAX_TITLE_LENGTH} characters`),
-  degreeType: z.enum(['Undergraduate', 'Postgraduate', 'Certificate']),
+  degreeType: z.enum(['Certificate', 'Diploma', 'Degree', 'Masters', 'PhD', 'Postgraduate']),
   schoolId: z.string().min(1, 'School is required'),
   duration: z.string().min(1, 'Duration is required'),
   overview: z

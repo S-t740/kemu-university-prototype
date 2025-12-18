@@ -17,8 +17,12 @@ import Apply from './pages/Apply';
 import About from './pages/About';
 import ProgrammesAll from './pages/ProgrammesAll';
 import Schools from './pages/Schools';
+import Portals from './pages/Portals';
 import Admin from './pages/Admin';
 import Inbox from './pages/Inbox';
+
+// TVET Pages
+import { TVETHome, TVETPrograms, TVETAdmissions, TVETCareers, TVETAbout, TVETAdmin, TVETApply, TVETNews } from './pages/tvet';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -52,8 +56,20 @@ const App: React.FC = () => {
               <Route path="/about" element={<About />} />
               <Route path="/programmes" element={<ProgrammesAll />} />
               <Route path="/schools" element={<Schools />} />
+              <Route path="/portals" element={<Portals />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/inbox" element={<Inbox />} />
+
+              {/* TVET Routes */}
+              <Route path="/tvet" element={<TVETHome />} />
+              <Route path="/tvet/programs" element={<TVETPrograms />} />
+              <Route path="/tvet/admissions" element={<TVETAdmissions />} />
+              <Route path="/tvet/careers" element={<TVETCareers />} />
+              <Route path="/tvet/about" element={<TVETAbout />} />
+              <Route path="/tvet/admin" element={<TVETAdmin />} />
+              <Route path="/tvet/apply/:slug" element={<TVETApply />} />
+              <Route path="/tvet/news" element={<TVETNews />} />
+
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </main>

@@ -206,8 +206,24 @@ const VisionMissionContent: React.FC = () => {
                     </div>
                     <div>
                         <h3 className="text-2xl font-serif font-bold text-kemu-gold mb-3">Our Motto</h3>
-                        <p className="text-lg text-gray-700 leading-relaxed italic">
-                            "Transforming Lives Through Excellence in Education"
+                        <p className="text-lg text-gray-700 leading-relaxed">
+                            <span className="italic font-semibold">"Laborare Est Orare"</span>
+                            <br />
+                            <span className="text-base text-gray-600">(Translation from Latin to English: "To Work is to Pray", Swahili: "Kazi ni Sala")</span>
+                        </p>
+                    </div>
+                </div>
+            </GlassSection>
+
+            <GlassSection>
+                <div className="flex items-start gap-4 mb-4">
+                    <div className="p-3 rounded-lg bg-gradient-to-br from-kemu-purple/20 to-kemu-gold/20">
+                        <Target size={28} className="text-kemu-purple" />
+                    </div>
+                    <div>
+                        <h3 className="text-2xl font-serif font-bold text-kemu-purple mb-3">Our Slogan</h3>
+                        <p className="text-lg text-gray-700 leading-relaxed italic font-semibold">
+                            "The Future is Here"
                         </p>
                     </div>
                 </div>

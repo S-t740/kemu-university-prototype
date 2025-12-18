@@ -11,7 +11,10 @@ const UPLOADS_BASE_URL = API_BASE_URL.replace('/api', '');
 
 interface ApplicationsManagementProps {
     onRefreshData?: () => Promise<void>;
+    institution?: string;  // Optional: filter applications by vacancy institution (e.g., 'TVET')
+    excludeInstitution?: string;  // Optional: exclude applications from a specific institution
 }
+
 
 const statusColors: Record<ApplicationStatus, { bg: string; text: string; label: string }> = {
     pending: { bg: 'bg-yellow-100', text: 'text-yellow-800', label: 'Pending Review' },
@@ -22,7 +25,7 @@ const statusColors: Record<ApplicationStatus, { bg: string; text: string; label:
     hired: { bg: 'bg-emerald-100', text: 'text-emerald-800', label: 'Hired' }
 };
 
-const ApplicationsManagement: React.FC<ApplicationsManagementProps> = ({ onRefreshData }) => {
+const ApplicationsManagement: React.FC<ApplicationsManagementProps> = ({ onRefreshData, institution, excludeInstitution }) => {
     const [applications, setApplications] = useState<Application[]>([]);
     const [vacancies, setVacancies] = useState<Vacancy[]>([]);
     const [loading, setLoading] = useState(true);
@@ -52,12 +55,24 @@ const ApplicationsManagement: React.FC<ApplicationsManagementProps> = ({ onRefre
         setLoading(true);
         setError(null);
         try {
+            // Build filter object based on props
+            const filters: { institution?: string; excludeInstitution?: string } = {};
+            if (institution) filters.institution = institution;
+            if (excludeInstitution) filters.excludeInstitution = excludeInstitution;
+
             const [appsData, vacanciesData] = await Promise.all([
-                getApplications(),
+                getApplications(Object.keys(filters).length > 0 ? filters : undefined),
                 getAllVacancies()
             ]);
+            // Filter vacancies based on institution/excludeInstitution
+            let filteredVacancies = vacanciesData;
+            if (institution) {
+                filteredVacancies = vacanciesData.filter((v: Vacancy) => v.institution === institution);
+            } else if (excludeInstitution) {
+                filteredVacancies = vacanciesData.filter((v: Vacancy) => v.institution !== excludeInstitution);
+            }
             setApplications(appsData);
-            setVacancies(vacanciesData);
+            setVacancies(filteredVacancies);
         } catch (err) {
             setError(handleApiError(err));
         } finally {

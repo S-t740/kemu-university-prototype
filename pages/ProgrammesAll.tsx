@@ -1,20 +1,28 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Search, GraduationCap, Award, BookOpen, Trophy, X } from 'lucide-react';
 import { PageHero, ContentSection } from '../components/common';
+import { getPrograms } from '../services/api';
+import { Program } from '../types';
 
 /**
  * Programmes Page - Consolidated page with all programme offerings
  * Features filtering by level and search
+ * Now fetches from API and merges with static data
  */
 
-type ProgrammeLevel = 'All' | 'Certificate' | 'Diploma' | 'Degree' | 'Masters' | 'PhD' | 'TVET';
+type ProgrammeLevel = 'All' | 'Certificate' | 'Diploma' | 'Degree' | 'Masters' | 'PhD' | 'TVET' | 'Postgraduate';
 
 interface Programme {
+    id?: number;
     name: string;
+    slug?: string;  // For API programs
     level: ProgrammeLevel;
     duration?: string;
     intake?: string;
     description?: string;
+    school?: string;
+    isFromApi?: boolean;
 }
 
 const Programmes: React.FC = () => {
@@ -22,9 +30,37 @@ const Programmes: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedProgramme, setSelectedProgramme] = useState<Programme | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [apiPrograms, setApiPrograms] = useState<Programme[]>([]);
+    const [loading, setLoading] = useState(true);
 
-    // Programme data with descriptions
-    const allProgrammes: Programme[] = [
+    // Fetch programs from API on mount
+    useEffect(() => {
+        const fetchApiPrograms = async () => {
+            try {
+                const programs = await getPrograms();
+                const mapped: Programme[] = programs.map((p: Program) => ({
+                    id: p.id,
+                    name: p.title,
+                    slug: p.slug,  // Include slug for navigation
+                    level: p.degreeType as ProgrammeLevel,
+                    duration: p.duration || '4 years',
+                    intake: 'Jan, May, Sep',
+                    description: p.overview || '',
+                    school: p.school?.name,
+                    isFromApi: true
+                }));
+                setApiPrograms(mapped);
+            } catch (error) {
+                console.error('Failed to fetch programs:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchApiPrograms();
+    }, []);
+
+    // Static programme data (fallback/additional programs)
+    const staticProgrammes: Programme[] = [
         // Certificate Programmes
         { name: 'Certificate in Church Ministry', level: 'Certificate', duration: '1-2 years', intake: 'Jan, May, Sep', description: 'Equip yourself for effective ministry leadership with this comprehensive programme covering biblical studies, pastoral care, church administration, and practical ministry skills.' },
         { name: 'Certificate in Church Music', level: 'Certificate', duration: '1-2 years', intake: 'Jan, May, Sep', description: 'Develop your musical skills and theological understanding for effective church music ministry, covering worship leadership, choir direction, and music theory.' },
@@ -69,6 +105,14 @@ const Programmes: React.FC = () => {
         { name: 'Craft Certificate in Business Management (TVET)', level: 'TVET', duration: 'Level 5', intake: 'Rolling', description: 'Learn fundamental business skills including basic accounting, customer service, inventory management, and workplace communication.' },
     ];
 
+    // Merge API programs with static programs, avoiding duplicates
+    const allProgrammes = useMemo(() => {
+        const apiNames = new Set(apiPrograms.map(p => p.name.toLowerCase()));
+        const filteredStatic = staticProgrammes.filter(p => !apiNames.has(p.name.toLowerCase()));
+        // API programs first, then static ones
+        return [...apiPrograms, ...filteredStatic];
+    }, [apiPrograms]);
+
     // Filter programmes
     const filteredProgrammes = useMemo(() => {
         let filtered = allProgrammes;
@@ -88,7 +132,7 @@ const Programmes: React.FC = () => {
         return filtered;
     }, [activeFilter, searchQuery, allProgrammes]);
 
-    const filters: ProgrammeLevel[] = ['All', 'Certificate', 'Diploma', 'Degree', 'Masters', 'PhD', 'TVET'];
+    const filters: ProgrammeLevel[] = ['All', 'Certificate', 'Diploma', 'Degree', 'Masters', 'PhD', 'Postgraduate', 'TVET'];
 
     const getLevelIcon = (level: ProgrammeLevel) => {
         switch (level) {
@@ -97,6 +141,7 @@ const Programmes: React.FC = () => {
             case 'Degree': return GraduationCap;
             case 'Masters': return Trophy;
             case 'PhD': return Trophy;
+            case 'Postgraduate': return GraduationCap;
             case 'TVET': return Award;
             default: return GraduationCap;
         }
@@ -109,6 +154,7 @@ const Programmes: React.FC = () => {
             case 'Degree': return 'from-kemu-purple/20 to-kemu-blue/20';
             case 'Masters': return 'from-kemu-gold/20 to-yellow-600/20';
             case 'PhD': return 'from-red-500/20 to-pink-600/20';
+            case 'Postgraduate': return 'from-indigo-500/20 to-purple-600/20';
             case 'TVET': return 'from-teal-500/20 to-cyan-600/20';
             default: return 'from-gray-500/20 to-gray-600/20';
         }
@@ -201,16 +247,25 @@ const Programmes: React.FC = () => {
                                     </p>
                                 )}
 
-                                {/* CTA */}
-                                <button
-                                    onClick={() => {
-                                        setSelectedProgramme(programme);
-                                        setIsModalOpen(true);
-                                    }}
-                                    className="w-full py-2 rounded-lg bg-kemu-purple text-white font-semibold hover:bg-kemu-blue transition-colors"
-                                >
-                                    Learn More
-                                </button>
+                                {/* CTA - Navigate to full page for API programs, modal for static */}
+                                {programme.isFromApi && programme.slug ? (
+                                    <Link
+                                        to={`/programs/${programme.slug}`}
+                                        className="block w-full py-2 rounded-lg bg-kemu-purple text-white font-semibold hover:bg-kemu-blue transition-colors text-center"
+                                    >
+                                        Learn More
+                                    </Link>
+                                ) : (
+                                    <button
+                                        onClick={() => {
+                                            setSelectedProgramme(programme);
+                                            setIsModalOpen(true);
+                                        }}
+                                        className="w-full py-2 rounded-lg bg-kemu-purple text-white font-semibold hover:bg-kemu-blue transition-colors"
+                                    >
+                                        Learn More
+                                    </button>
+                                )}
                             </div>
                         );
                     })}

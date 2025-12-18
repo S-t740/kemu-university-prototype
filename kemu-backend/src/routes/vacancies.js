@@ -9,12 +9,26 @@ const prisma = new PrismaClient();
 // GET all active vacancies (public - only non-expired)
 router.get('/', async (req, res) => {
     try {
+        const { institution, excludeInstitution } = req.query;
+        const where = {
+            deadline: {
+                gte: new Date() // Only future or today's deadlines
+            }
+        };
+
+        if (institution) {
+            where.institution = institution;
+        }
+
+        // Exclude vacancies from a specific institution
+        if (excludeInstitution) {
+            where.NOT = {
+                institution: excludeInstitution
+            };
+        }
+
         const vacancies = await prisma.vacancy.findMany({
-            where: {
-                deadline: {
-                    gte: new Date() // Only future or today's deadlines
-                }
-            },
+            where,
             orderBy: {
                 createdAt: 'desc'
             }
@@ -32,6 +46,7 @@ router.get('/', async (req, res) => {
         res.status(500).json({ message: 'Error fetching vacancies' });
     }
 });
+
 
 // GET all vacancies including expired (admin only)
 router.get('/all', auth, async (req, res) => {
@@ -84,7 +99,7 @@ router.get('/:slug', async (req, res) => {
 // POST create new vacancy (admin only, with images)
 router.post('/', auth, upload.array('images', 5), async (req, res) => {
     try {
-        const { title, slug, department, location, type, description, requirements, deadline } = req.body;
+        const { title, slug, department, location, type, description, requirements, deadline, institution } = req.body;
 
         // Collect uploaded image paths
         const imagePaths = req.files ? req.files.map(file => `/uploads/vacancies/${file.filename}`) : [];
@@ -99,7 +114,8 @@ router.post('/', auth, upload.array('images', 5), async (req, res) => {
                 description,
                 requirements,
                 deadline: new Date(deadline),
-                images: imagePaths.length > 0 ? JSON.stringify(imagePaths) : null
+                images: imagePaths.length > 0 ? JSON.stringify(imagePaths) : null,
+                institution: institution || 'University'
             }
         });
 

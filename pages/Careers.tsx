@@ -25,7 +25,8 @@ const Careers: React.FC = () => {
         setLoading(true);
         setError(null);
         try {
-            const data = await getVacancies();
+            // Exclude TVET vacancies from main careers page
+            const data = await getVacancies({ excludeInstitution: 'TVET' });
             setVacancies(data);
         } catch (err) {
             setError(handleApiError(err));
@@ -33,6 +34,7 @@ const Careers: React.FC = () => {
             setLoading(false);
         }
     };
+
 
     const filteredVacancies = vacancies.filter(vacancy => {
         const matchesSearch = vacancy.title.toLowerCase().includes(searchTerm.toLowerCase()) ||

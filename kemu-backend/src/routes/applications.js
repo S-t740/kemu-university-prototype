@@ -86,7 +86,7 @@ router.post('/', applicationUpload, async (req, res) => {
 // GET /api/applications - Get all applications (admin only)
 router.get('/', auth, async (req, res) => {
     try {
-        const { status, vacancyId, search } = req.query;
+        const { status, vacancyId, search, institution, excludeInstitution } = req.query;
 
         const where = {};
 
@@ -96,6 +96,23 @@ router.get('/', auth, async (req, res) => {
 
         if (vacancyId) {
             where.vacancyId = parseInt(vacancyId);
+        }
+
+        // Filter by vacancy institution (include only)
+        if (institution) {
+            where.vacancy = {
+                institution: institution
+            };
+        }
+
+        // Exclude applications from a specific institution
+        if (excludeInstitution) {
+            where.vacancy = {
+                ...where.vacancy,
+                NOT: {
+                    institution: excludeInstitution
+                }
+            };
         }
 
         if (search) {
@@ -110,7 +127,7 @@ router.get('/', auth, async (req, res) => {
             where,
             include: {
                 vacancy: {
-                    select: { id: true, title: true, department: true, slug: true }
+                    select: { id: true, title: true, department: true, slug: true, institution: true }
                 }
             },
             orderBy: { createdAt: 'desc' }
@@ -122,6 +139,8 @@ router.get('/', auth, async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch applications' });
     }
 });
+
+
 
 // GET /api/applications/stats - Get application statistics (admin only)
 router.get('/stats', auth, async (req, res) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Calendar, Clock, MapPin } from 'lucide-react';
+import { ArrowRight, MapPin } from 'lucide-react';
 import { NewsItem, EventItem } from '../../types';
 
 /**
@@ -61,35 +61,58 @@ interface EventCardProps {
 }
 
 const EventCard: React.FC<EventCardProps> = ({ item, delay }) => {
+    const [expanded, setExpanded] = React.useState(false);
+    const hasDetails = item.details || item.description;
+
     return (
         <div
-            className="group backdrop-blur-xl bg-white/30 border border-white/40 rounded-xl p-5 hover:shadow-deep-3d hover:bg-white/40 transition-all duration-300 animate-slide-up-fade"
+            className="group backdrop-blur-xl bg-white/30 border border-white/40 rounded-xl p-4 hover:shadow-deep-3d hover:bg-white/40 transition-all duration-300 animate-slide-up-fade"
             style={{ animationDelay: `${delay}s` }}
         >
-            {/* Title */}
-            <h4 className="font-serif font-bold text-base text-kemu-purple mb-3 group-hover:text-kemu-gold transition-colors">
-                {item.title}
-            </h4>
-
-            {/* Event Details */}
-            <div className="space-y-2 text-sm text-gray-600">
-                <div className="flex items-center gap-2">
-                    <Calendar size={16} className="text-kemu-gold flex-shrink-0" />
-                    <span>{new Date(item.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+            <div className="flex items-start justify-between gap-3">
+                {/* Left: Date Badge */}
+                <div className="flex-shrink-0 w-14 h-14 rounded-lg bg-gradient-to-br from-kemu-purple to-kemu-blue flex flex-col items-center justify-center text-white shadow-md">
+                    <div className="text-lg font-bold leading-none">
+                        {new Date(item.date).getDate()}
+                    </div>
+                    <div className="text-[10px] uppercase tracking-wide">
+                        {new Date(item.date).toLocaleString('default', { month: 'short' })}
+                    </div>
                 </div>
-                {item.time && (
-                    <div className="flex items-center gap-2">
-                        <Clock size={16} className="text-kemu-gold flex-shrink-0" />
-                        <span>{item.time}</span>
-                    </div>
-                )}
-                {item.location && (
-                    <div className="flex items-center gap-2">
-                        <MapPin size={16} className="text-kemu-gold flex-shrink-0" />
-                        <span className="line-clamp-1">{item.location}</span>
-                    </div>
+
+                {/* Right: Content */}
+                <div className="flex-1 min-w-0">
+                    <h4 className="font-serif font-bold text-base text-kemu-purple group-hover:text-kemu-gold transition-colors line-clamp-2 mb-1">
+                        {item.title}
+                    </h4>
+                    {item.venue && (
+                        <div className="flex items-center gap-1 text-xs text-gray-600">
+                            <MapPin size={12} className="text-kemu-gold flex-shrink-0" />
+                            <span className="line-clamp-1">{item.venue}</span>
+                        </div>
+                    )}
+                </div>
+
+                {/* Expand Button */}
+                {hasDetails && (
+                    <button
+                        onClick={() => setExpanded(!expanded)}
+                        className="flex-shrink-0 p-1.5 rounded-full hover:bg-kemu-purple/10 transition-colors"
+                        title={expanded ? 'Hide details' : 'View details'}
+                    >
+                        <ArrowRight size={16} className={`text-kemu-purple transition-transform duration-200 ${expanded ? 'rotate-90' : ''}`} />
+                    </button>
                 )}
             </div>
+
+            {/* Expandable Description */}
+            {hasDetails && expanded && (
+                <div className="mt-3 pt-3 border-t border-gray-200/50 animate-fade-in">
+                    <p className="text-sm text-gray-700 leading-relaxed">
+                        {item.details || item.description}
+                    </p>
+                </div>
+            )}
         </div>
     );
 };

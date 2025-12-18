@@ -46,10 +46,11 @@ export const getStats = async (): Promise<Stats> => {
   return res.data;
 };
 
-export const getPrograms = async (query?: string, degree?: string): Promise<Program[]> => {
+export const getPrograms = async (query?: string, degree?: string, institution?: string): Promise<Program[]> => {
   const params: any = {};
   if (query) params.q = query;
   if (degree && degree !== 'All') params.degree = degree;
+  if (institution) params.institution = institution;
   const res = await api.get('/programs', { params });
   return res.data;
 };
@@ -73,8 +74,11 @@ export const deleteProgram = async (id: number): Promise<void> => {
   await api.delete(`/programs/${id}`);
 }
 
-export const getNews = async (): Promise<NewsItem[]> => {
-  const res = await api.get('/news');
+export const getNews = async (options?: { institution?: string; excludeInstitution?: string }): Promise<NewsItem[]> => {
+  const params: any = {};
+  if (options?.institution) params.institution = options.institution;
+  if (options?.excludeInstitution) params.excludeInstitution = options.excludeInstitution;
+  const res = await api.get('/news', { params });
   return res.data;
 };
 
@@ -97,8 +101,11 @@ export const deleteNews = async (id: number): Promise<void> => {
   await api.delete(`/news/${id}`);
 }
 
-export const getEvents = async (): Promise<EventItem[]> => {
-  const res = await api.get('/events');
+export const getEvents = async (options?: { institution?: string; excludeInstitution?: string }): Promise<EventItem[]> => {
+  const params: any = {};
+  if (options?.institution) params.institution = options.institution;
+  if (options?.excludeInstitution) params.excludeInstitution = options.excludeInstitution;
+  const res = await api.get('/events', { params });
   return res.data;
 };
 
@@ -144,10 +151,14 @@ export const deleteEvent = async (id: number): Promise<void> => {
 
 
 // Vacancy APIs
-export const getVacancies = async (): Promise<any[]> => {
-  const response = await api.get('/vacancies');
+export const getVacancies = async (options?: { institution?: string; excludeInstitution?: string }): Promise<any[]> => {
+  const params: any = {};
+  if (options?.institution) params.institution = options.institution;
+  if (options?.excludeInstitution) params.excludeInstitution = options.excludeInstitution;
+  const response = await api.get('/vacancies', { params });
   return response.data;
 };
+
 
 export const getAllVacancies = async (): Promise<any[]> => {
   const response = await api.get('/vacancies/all');
@@ -218,15 +229,19 @@ export const submitApplication = async (formData: FormData): Promise<any> => {
   return response.data;
 };
 
-export const getApplications = async (filters?: { status?: string; vacancyId?: number; search?: string }): Promise<any[]> => {
+export const getApplications = async (filters?: { status?: string; vacancyId?: number; search?: string; institution?: string; excludeInstitution?: string }): Promise<any[]> => {
   const params = new URLSearchParams();
   if (filters?.status) params.append('status', filters.status);
   if (filters?.vacancyId) params.append('vacancyId', filters.vacancyId.toString());
   if (filters?.search) params.append('search', filters.search);
+  if (filters?.institution) params.append('institution', filters.institution);
+  if (filters?.excludeInstitution) params.append('excludeInstitution', filters.excludeInstitution);
 
   const response = await api.get(`/applications?${params.toString()}`);
   return response.data;
 };
+
+
 
 export const getApplicationsByVacancy = async (vacancyId: number): Promise<any[]> => {
   const response = await api.get(`/applications/vacancy/${vacancyId}`);
@@ -288,6 +303,26 @@ export const updateStudentService = async (id: number, data: Partial<StudentServ
 
 export const deleteStudentService = async (id: number): Promise<void> => {
   await api.delete(`/student-services/${id}`);
+};
+
+// Directorate APIs
+export const getDirectorates = async (): Promise<any[]> => {
+  const res = await api.get('/directorates');
+  return res.data;
+};
+
+export const createDirectorate = async (directorate: any): Promise<any> => {
+  const res = await api.post('/directorates', directorate);
+  return res.data;
+};
+
+export const updateDirectorate = async (id: number, directorate: any): Promise<any> => {
+  const res = await api.put(`/directorates/${id}`, directorate);
+  return res.data;
+};
+
+export const deleteDirectorate = async (id: number): Promise<void> => {
+  await api.delete(`/directorates/${id}`);
 };
 
 export default api;
