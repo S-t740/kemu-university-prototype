@@ -4,9 +4,20 @@ import { buildEnhancedSystemPrompt } from './knowledgeBase.js';
 
 dotenv.config();
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
+// Lazy initialization - don't crash if API key is missing at startup
+let openai = null;
+
+const getOpenAIClient = () => {
+    if (!openai) {
+        if (!process.env.OPENAI_API_KEY) {
+            throw new Error('OpenAI API key not configured. Chatbot is unavailable.');
+        }
+        openai = new OpenAI({
+            apiKey: process.env.OPENAI_API_KEY,
+        });
+    }
+    return openai;
+};
 
 const MODEL = process.env.OPENAI_MODEL || 'gpt-4o-mini';
 const MAX_TOKENS = parseInt(process.env.OPENAI_MAX_TOKENS) || 500;
@@ -35,7 +46,7 @@ export const getChatCompletion = async (messages, options = {}) => {
             ? messages
             : [{ role: 'system', content: systemPrompt }, ...messages];
 
-        const response = await openai.chat.completions.create({
+        const response = await getOpenAIClient().chat.completions.create({
             model: MODEL,
             messages: fullMessages,
             max_tokens: options.maxTokens || MAX_TOKENS,
@@ -72,7 +83,7 @@ export const getChatCompletion = async (messages, options = {}) => {
  */
 export const moderateContent = async (content) => {
     try {
-        const moderation = await openai.moderations.create({
+        const moderation = await getOpenAIClient().moderations.create({
             input: content,
         });
 
