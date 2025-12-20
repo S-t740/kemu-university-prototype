@@ -38,3 +38,5 @@ simple-test.js
 *.mov
 *.avi
 *.mkv
+# Exception: allow small hero video
+!public/2.mp4
