@@ -51,7 +51,7 @@ const Admissions: React.FC = () => {
         {/* Video Slide */}
         <div className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${activeSlide === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}>
           <video ref={videoRef} autoPlay muted playsInline onEnded={handleVideoEnded} className="w-full h-full object-fill">
-            <source src="/january-intake.mp4" type="video/mp4" />
+            <source src="https://res.cloudinary.com/dpi3ynfa7/video/upload/j3_lijpkk.mp4" type="video/mp4" />
           </video>
         </div>
 
