@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { CheckCircle, FileText, Send, CreditCard, ExternalLink, Award, DollarSign, Globe, Download, Calendar, Clock, GraduationCap } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { CheckCircle, FileText, Send, CreditCard, ExternalLink, Award, DollarSign, Globe, Download, Calendar, Clock, GraduationCap, ArrowRight } from 'lucide-react';
 import { getAdmissions, getStudentServices } from '../utils/contentLoader';
 import { GoldButton, GlassSection } from '../components';
 
@@ -110,9 +111,15 @@ const Admissions: React.FC = () => {
               <li className="flex items-center"><CheckCircle size={14} className="mr-2 text-kemu-gold" />KCSE Result Slip / Certificate</li>
               <li className="flex items-center"><CheckCircle size={14} className="mr-2 text-kemu-gold" />Passport sized photos</li>
             </ul>
-            <GoldButton href="https://admissions.kemu.ac.ke/" icon={ExternalLink}>
-              Application Portal
-            </GoldButton>
+            <Link
+              to="/student-apply"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-kemu-gold to-yellow-500 
+                text-white font-bold rounded-xl shadow-glow-gold hover:shadow-deep-3d 
+                transition-all duration-300 hover:-translate-y-0.5"
+            >
+              <ArrowRight size={18} />
+              Apply Now Online
+            </Link>
           </div>
 
           {/* Scholarship Card */}

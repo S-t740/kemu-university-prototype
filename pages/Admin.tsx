@@ -13,6 +13,7 @@ import axios from 'axios';
 import ApplicationsManagement from '../components/ApplicationsManagement';
 import StudentServicesManagement from '../components/StudentServicesManagement';
 import DirectoratesManagement from '../components/DirectoratesManagement';
+import StudentApplicationsManagement from '../components/StudentApplicationsManagement';
 import CollapsibleSection from '../components/admin/CollapsibleSection';
 import { BookOpen, Lightbulb } from 'lucide-react';
 
@@ -33,7 +34,7 @@ const Admin: React.FC = () => {
   const [loginError, setLoginError] = useState<string>('');
   const [loginErrors, setLoginErrors] = useState<Record<string, string>>({});
 
-  const [activeTab, setActiveTab] = useState<'programs' | 'news' | 'schools' | 'events' | 'vacancies' | 'applications' | 'studentServices' | 'directorates' | 'inbox'>('programs');
+  const [activeTab, setActiveTab] = useState<'programs' | 'news' | 'schools' | 'events' | 'vacancies' | 'applications' | 'studentApplications' | 'studentServices' | 'directorates' | 'inbox'>('programs');
   const [programs, setPrograms] = useState<Program[]>([]);
   const [news, setNews] = useState<NewsItem[]>([]);
   const [schools, setSchools] = useState<School[]>([]);
@@ -156,7 +157,7 @@ const Admin: React.FC = () => {
     setNewsImages([...newsImages, ...newFiles]);
 
     // Generate previews
-    newFiles.forEach(file => {
+    newFiles.forEach((file: File) => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setNewsImagePreviews(prev => [...prev, reader.result as string]);
@@ -190,7 +191,7 @@ const Admin: React.FC = () => {
     setEventImages([...eventImages, ...newFiles]);
 
     // Generate previews
-    newFiles.forEach(file => {
+    newFiles.forEach((file: File) => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setEventImagePreviews(prev => [...prev, reader.result as string]);
@@ -223,7 +224,7 @@ const Admin: React.FC = () => {
 
     setVacancyImages(prev => [...prev, ...newFiles]);
 
-    newFiles.forEach(file => {
+    newFiles.forEach((file: File) => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setVacancyImagePreviews(prev => [...prev, reader.result as string]);
@@ -775,6 +776,17 @@ const Admin: React.FC = () => {
           </button>
           <button
             role="tab"
+            aria-selected={activeTab === 'studentApplications'}
+            onClick={() => setActiveTab('studentApplications')}
+            className={`flex items-center px-6 py-3 rounded-lg font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-kemu-purple focus:ring-offset-2 transition-all duration-200 ${activeTab === 'studentApplications'
+              ? 'bg-gradient-to-r from-green-600 to-kemu-purple text-white shadow-md'
+              : 'bg-transparent text-gray-600 hover:bg-gray-50 hover:text-green-600'
+              }`}
+          >
+            <GraduationCap size={18} className="mr-2" aria-hidden="true" /> Student Admissions
+          </button>
+          <button
+            role="tab"
             aria-selected={activeTab === 'inbox'}
             onClick={() => setActiveTab('inbox')}
             className={`flex items-center px-6 py-3 rounded-lg font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-kemu-purple focus:ring-offset-2 transition-all duration-200 ${activeTab === 'inbox'
@@ -848,7 +860,7 @@ const Admin: React.FC = () => {
         </div>
 
         {/* Main Content Grid - Only show for non-applications and non-studentServices tabs */}
-        {activeTab !== 'applications' && activeTab !== 'studentServices' && activeTab !== 'directorates' && (
+        {activeTab !== 'applications' && activeTab !== 'studentServices' && activeTab !== 'directorates' && activeTab !== 'studentApplications' && (
           <div className="grid lg:grid-cols-3 gap-6">
             {/* Professional Form Section */}
             <div className="lg:col-span-1">
@@ -1824,6 +1836,13 @@ const Admin: React.FC = () => {
         {activeTab === 'directorates' && (
           <div className="mt-6">
             <DirectoratesManagement />
+          </div>
+        )}
+
+        {/* Student Applications Tab - Standalone Full-Width Section */}
+        {activeTab === 'studentApplications' && (
+          <div className="mt-6">
+            <StudentApplicationsManagement />
           </div>
         )}
 

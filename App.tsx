@@ -20,6 +20,12 @@ import Schools from './pages/Schools';
 import Portals from './pages/Portals';
 import Admin from './pages/Admin';
 import Inbox from './pages/Inbox';
+import StudentApply from './pages/StudentApply';
+import ApplicationStatus from './pages/ApplicationStatus';
+import ApplicantLogin from './pages/ApplicantLogin';
+import ApplicantRegister from './pages/ApplicantRegister';
+import ApplicantDashboard from './pages/ApplicantDashboard';
+import { ApplicantAuthProvider } from './contexts/ApplicantAuthContext';
 
 // TVET Pages
 import { TVETHome, TVETPrograms, TVETAdmissions, TVETCareers, TVETAbout, TVETAdmin, TVETApply, TVETNews } from './pages/tvet';
@@ -37,46 +43,60 @@ const ScrollToTop = () => {
 const App: React.FC = () => {
   return (
     <ErrorBoundary>
-      <Router>
-        <ScrollToTop />
-        <div className="min-h-screen flex flex-col">
-          <GlobalBackground />
-          <Navbar />
-          <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/programs" element={<Programs />} />
-              <Route path="/programs/:slug" element={<ProgramDetails />} />
-              <Route path="/news" element={<News />} />
-              <Route path="/news/:slug" element={<NewsDetails />} />
-              <Route path="/admissions" element={<Admissions />} />
-              <Route path="/careers" element={<Careers />} />
-              <Route path="/apply/:slug" element={<Apply />} />
-              {/* <Route path="/students" element={<Students />} /> */}
-              <Route path="/about" element={<About />} />
-              <Route path="/programmes" element={<ProgrammesAll />} />
-              <Route path="/schools" element={<Schools />} />
-              <Route path="/portals" element={<Portals />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/inbox" element={<Inbox />} />
+      <ApplicantAuthProvider>
+        <Router>
+          <ScrollToTop />
+          <div className="min-h-screen flex flex-col">
+            <GlobalBackground />
+            <Navbar />
+            <main className="flex-grow">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/programs" element={<Programs />} />
+                <Route path="/programs/:slug" element={<ProgramDetails />} />
+                <Route path="/news" element={<News />} />
+                <Route path="/news/:slug" element={<NewsDetails />} />
+                <Route path="/admissions" element={<Admissions />} />
+                <Route path="/careers" element={<Careers />} />
+                <Route path="/apply/:slug" element={<Apply />} />
+                {/* <Route path="/students" element={<Students />} /> */}
+                <Route path="/about" element={<About />} />
+                <Route path="/programmes" element={<ProgrammesAll />} />
+                <Route path="/schools" element={<Schools />} />
+                <Route path="/portals" element={<Portals />} />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/inbox" element={<Inbox />} />
 
-              {/* TVET Routes */}
-              <Route path="/tvet" element={<TVETHome />} />
-              <Route path="/tvet/programs" element={<TVETPrograms />} />
-              <Route path="/tvet/admissions" element={<TVETAdmissions />} />
-              <Route path="/tvet/careers" element={<TVETCareers />} />
-              <Route path="/tvet/about" element={<TVETAbout />} />
-              <Route path="/tvet/admin" element={<TVETAdmin />} />
-              <Route path="/tvet/apply/:slug" element={<TVETApply />} />
-              <Route path="/tvet/news" element={<TVETNews />} />
+                {/* TVET Routes */}
+                <Route path="/tvet" element={<TVETHome />} />
+                <Route path="/tvet/programs" element={<TVETPrograms />} />
+                <Route path="/tvet/admissions" element={<TVETAdmissions />} />
+                <Route path="/tvet/careers" element={<TVETCareers />} />
+                <Route path="/tvet/about" element={<TVETAbout />} />
+                <Route path="/tvet/admin" element={<TVETAdmin />} />
+                <Route path="/tvet/apply/:slug" element={<TVETApply />} />
+                <Route path="/tvet/news" element={<TVETNews />} />
+                <Route path="/tvet/student-apply" element={<StudentApply institution="TVET" />} />
+                <Route path="/tvet/student-apply/:programmeSlug" element={<StudentApply institution="TVET" />} />
 
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </main>
-          <Footer />
-          <Chatbot />
-        </div>
-      </Router>
+                {/* Student Application Portal Routes */}
+                <Route path="/student-apply" element={<StudentApply />} />
+                <Route path="/student-apply/:programmeSlug" element={<StudentApply />} />
+                <Route path="/application-status" element={<ApplicationStatus />} />
+
+                {/* Applicant Account Routes */}
+                <Route path="/applicant/login" element={<ApplicantLogin />} />
+                <Route path="/applicant/register" element={<ApplicantRegister />} />
+                <Route path="/applicant/dashboard" element={<ApplicantDashboard />} />
+
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </main>
+            <Footer />
+            <Chatbot />
+          </div>
+        </Router>
+      </ApplicantAuthProvider>
     </ErrorBoundary>
   );
 };

@@ -6,7 +6,7 @@ interface ModalProps {
   onClose: () => void;
   onConfirm?: () => void;
   title: string;
-  message: string;
+  message?: string;
   confirmText?: string;
   cancelText?: string;
   variant?: 'danger' | 'default';
@@ -84,7 +84,7 @@ const Modal: React.FC<ModalProps> = ({
               </button>
             </div>
             <div id="modal-description" className="mt-2">
-              <p className="text-sm text-gray-500">{message}</p>
+              {message && <p className="text-sm text-gray-500">{message}</p>}
               {children}
             </div>
           </div>
@@ -95,11 +95,10 @@ const Modal: React.FC<ModalProps> = ({
                   onConfirm();
                   onClose();
                 }}
-                className={`w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white sm:ml-3 sm:w-auto sm:text-sm ${
-                  variant === 'danger'
+                className={`w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white sm:ml-3 sm:w-auto sm:text-sm ${variant === 'danger'
                     ? 'bg-red-600 hover:bg-red-700 focus:ring-red-500'
                     : 'bg-kemu-purple hover:bg-kemu-blue focus:ring-kemu-purple'
-                } focus:outline-none focus:ring-2 focus:ring-offset-2`}
+                  } focus:outline-none focus:ring-2 focus:ring-offset-2`}
               >
                 {confirmText}
               </button>

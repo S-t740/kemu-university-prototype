@@ -1,0 +1,9 @@
+export { default as WizardProgress } from './WizardProgress';
+export { default as ApplicantProfile } from './ApplicantProfile';
+export { default as ProgrammeSelection } from './ProgrammeSelection';
+export { default as EducationBackground } from './EducationBackground';
+export { default as DocumentUpload } from './DocumentUpload';
+export { default as PaymentSection } from './PaymentSection';
+export { default as ReviewDeclaration } from './ReviewDeclaration';
+export { default as ApplicationConfirmation } from './ApplicationConfirmation';
+export { default as ApplicationWizard } from './ApplicationWizard';

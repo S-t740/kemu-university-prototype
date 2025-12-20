@@ -100,7 +100,7 @@ const TVETNews: React.FC = () => {
                                         {item.title}
                                     </h3>
                                     <p className="text-gray-600 text-sm line-clamp-3">
-                                        {item.excerpt || item.content?.substring(0, 150) + '...'}
+                                        {item.summary || item.content?.substring(0, 150) + '...'}
                                     </p>
                                 </div>
                             </Link>

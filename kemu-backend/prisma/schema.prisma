@@ -17,17 +17,18 @@ model School {
 }
 
 model Program {
-  id           Int      @id @default(autoincrement())
-  title        String
-  slug         String   @unique
-  degreeType   String
-  duration     String?
-  overview     String?
-  requirements String?
-  schoolId     Int
-  school       School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
-  institution  String   @default("University") // "University" or "TVET"
-  createdAt    DateTime @default(now())
+  id                  Int                  @id @default(autoincrement())
+  title               String
+  slug                String               @unique
+  degreeType          String
+  duration            String?
+  overview            String?
+  requirements        String?
+  schoolId            Int
+  school              School               @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  institution         String               @default("University") // "University" or "TVET"
+  studentApplications StudentApplication[]
+  createdAt           DateTime             @default(now())
 }
 
 model News {
@@ -147,4 +148,86 @@ model Directorate {
   slug      String   @unique
   overview  String?
   createdAt DateTime @default(now())
+}
+
+model StudentApplication {
+  id                  Int       @id @default(autoincrement())
+  applicationId       String    @unique  // Generated: KEMU-2024-00001 or TVET-2024-00001
+  
+  // Applicant Profile
+  firstName           String
+  lastName            String
+  email               String
+  phoneCode           String    @default("+254")  // International phone code
+  phone               String
+  nationalId          String
+  dateOfBirth         DateTime
+  nationality         String    @default("Kenyan")
+  physicalAddress     String
+  
+  // Programme Selection
+  programId           Int
+  program             Program   @relation(fields: [programId], references: [id])
+  intake              String    // January, May, September
+  applicationType     String    // Direct, KUCCPS, Sponsored
+  kuccpsRefNumber     String?
+  sponsorDetails      String?   // For sponsored applications
+  
+  // Education History (JSON array)
+  educationHistory    String    // JSON: [{level, institution, award, year, grade}]
+  
+  // Documents (JSON - paths to uploaded files)
+  passportPhoto       String?
+  nationalIdDoc       String?
+  academicCerts       String?   // JSON array of paths
+  supportingDocs      String?   // JSON array of paths
+  
+  // Payment
+  applicationFee      Float     @default(1000)
+  paymentStatus       String    @default("pending") // pending, paid, waived
+  paymentReference    String?
+  paymentMethod       String?   // MPESA, Bank
+  mpesaReceiptNumber  String?
+  
+  // Workflow
+  status              String    @default("new") // new, received, reviewing, shortlisted, offered, rejected
+  adminNotes          String?
+  offerLetterPath     String?
+  
+  // Institution Scope
+  institution         String    @default("KEMU") // KEMU or TVET
+  
+  // Consent
+  declarationAccepted Boolean   @default(false)
+  privacyConsent      Boolean   @default(false)
+  
+  // Timestamps
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  submittedAt         DateTime?
+  
+  // Applicant Account Link (optional)
+  applicantId         Int?
+  applicant           Applicant? @relation(fields: [applicantId], references: [id])
+}
+
+model Applicant {
+  id            Int                  @id @default(autoincrement())
+  email         String               @unique
+  password      String               // bcrypt hashed
+  firstName     String
+  lastName      String
+  phone         String?
+  phoneCode     String?              @default("+254")
+  nationalId    String?
+  isVerified    Boolean              @default(false)
+  
+  // OTP Verification
+  otpCode       String?
+  otpExpiry     DateTime?
+  otpMethod     String?              // "email" or "phone"
+  
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+  applications  StudentApplication[]
 }

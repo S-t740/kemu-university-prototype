@@ -18,8 +18,8 @@ const TVETHome: React.FC = () => {
         const fetchData = async () => {
             try {
                 const [newsData, eventsData] = await Promise.all([
-                    getNews('TVET'),
-                    getEvents('TVET')
+                    getNews({ institution: 'TVET' }),
+                    getEvents({ institution: 'TVET' })
                 ]);
                 setNews(newsData.slice(0, 3));
                 setEvents(eventsData.slice(0, 3));

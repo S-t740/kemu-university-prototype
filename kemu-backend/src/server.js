@@ -17,6 +17,8 @@ import aiChatRoutes from './routes/aiChat.js';
 import knowledgeRoutes from './routes/knowledge.js';
 import studentServicesRoutes from './routes/studentServices.js';
 import directoratesRoutes from './routes/directorates.js';
+import studentApplicationsRoutes from './routes/studentApplications.js';
+import applicantAuthRoutes from './routes/applicantAuth.js';
 
 // Load environment variables
 dotenv.config();
@@ -56,6 +58,8 @@ app.use('/api/chat', aiChatRoutes);
 app.use('/api/knowledge', knowledgeRoutes);
 app.use('/api/student-services', studentServicesRoutes);
 app.use('/api/directorates', directoratesRoutes);
+app.use('/api/student-applications', studentApplicationsRoutes);
+app.use('/api/applicant', applicantAuthRoutes);
 
 // 404 handler
 app.use((req, res) => {

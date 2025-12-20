@@ -68,7 +68,7 @@ const Programs: React.FC = () => {
                 aria-label="Filter by degree type"
               >
                 <option value="All">All Degrees</option>
-                <option value={DegreeType.Undergraduate}>Undergraduate</option>
+                <option value={DegreeType.Degree}>Degree</option>
                 <option value={DegreeType.Postgraduate}>Postgraduate</option>
                 <option value={DegreeType.Certificate}>Certificate</option>
               </select>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Program, NewsItem, EventItem, Stats, DegreeType } from '../types';
+import { Program, NewsItem, EventItem, Stats, DegreeType, StudentApplication, StudentApplicationFormData, StudentApplicationStats, Applicant, ApplicantAuthResponse, ApplicantApplicationsResponse } from '../types';
 import { API_BASE_URL, API_TIMEOUT } from '../constants';
 
 const api = axios.create({
@@ -15,9 +15,13 @@ const api = axios.create({
 // Request interceptor for adding auth tokens
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('kemu_token');
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
+    // Only add admin token if Authorization header is not already set
+    // This allows applicant APIs to set their own token
+    if (!config.headers['Authorization']) {
+      const token = localStorage.getItem('kemu_token');
+      if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`;
+      }
     }
     return config;
   },
@@ -31,7 +35,8 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response) {
-      const message = error.response.data?.message || 'An error occurred';
+      // Check for both 'error' and 'message' fields (different endpoints use different formats)
+      const message = error.response.data?.error || error.response.data?.message || 'An error occurred';
       return Promise.reject(new Error(message));
     } else if (error.request) {
       return Promise.reject(new Error('Network error. Please check your connection.'));
@@ -323,6 +328,174 @@ export const updateDirectorate = async (id: number, directorate: any): Promise<a
 
 export const deleteDirectorate = async (id: number): Promise<void> => {
   await api.delete(`/directorates/${id}`);
+};
+
+// ==================== STUDENT APPLICATION APIs ====================
+
+// Submit new student application
+export const submitStudentApplication = async (data: StudentApplicationFormData): Promise<{ success: boolean; applicationId: string; application: StudentApplication }> => {
+  const response = await api.post('/student-applications', data);
+  return response.data;
+};
+
+// Check application status (public)
+export const getStudentApplicationStatus = async (applicationId: string): Promise<Partial<StudentApplication>> => {
+  const response = await api.get(`/student-applications/${applicationId}/status`);
+  return response.data;
+};
+
+// Upload documents
+export const uploadStudentDocuments = async (formData: FormData): Promise<{ success: boolean; files: Record<string, string | string[]> }> => {
+  const response = await api.post('/student-applications/upload', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  });
+  return response.data;
+};
+
+// MPESA STK Push
+export const initiateMpesaPayment = async (phone: string, amount: number, applicationId: string): Promise<{ success: boolean; checkoutRequestId: string; message: string; stub?: boolean; instructions?: string[] }> => {
+  const response = await api.post('/student-applications/payment/mpesa/stk-push', { phone, amount, applicationId });
+  return response.data;
+};
+
+// Verify MPESA payment
+export const verifyMpesaPayment = async (applicationId: string, mpesaReceiptNumber: string, checkoutRequestId?: string): Promise<{ success: boolean; paymentStatus: string }> => {
+  const response = await api.post('/student-applications/payment/mpesa/verify', { applicationId, mpesaReceiptNumber, checkoutRequestId });
+  return response.data;
+};
+
+// Admin: Get all applications
+export const getStudentApplications = async (filters?: {
+  institution?: string;
+  status?: string;
+  intake?: string;
+  programId?: number;
+  search?: string;
+  page?: number;
+  limit?: number
+}): Promise<{ applications: StudentApplication[]; pagination: { total: number; page: number; limit: number; totalPages: number } }> => {
+  const params = new URLSearchParams();
+  if (filters?.institution) params.append('institution', filters.institution);
+  if (filters?.status) params.append('status', filters.status);
+  if (filters?.intake) params.append('intake', filters.intake);
+  if (filters?.programId) params.append('programId', filters.programId.toString());
+  if (filters?.search) params.append('search', filters.search);
+  if (filters?.page) params.append('page', filters.page.toString());
+  if (filters?.limit) params.append('limit', filters.limit.toString());
+
+  const response = await api.get(`/student-applications/admin/all?${params.toString()}`);
+  return response.data;
+};
+
+// Admin: Get application statistics
+export const getStudentApplicationStats = async (institution?: string): Promise<StudentApplicationStats> => {
+  const params = institution ? `?institution=${institution}` : '';
+  const response = await api.get(`/student-applications/admin/stats${params}`);
+  return response.data;
+};
+
+// Admin: Get single application detail
+export const getStudentApplicationDetail = async (id: number): Promise<StudentApplication> => {
+  const response = await api.get(`/student-applications/admin/${id}`);
+  return response.data;
+};
+
+// Admin: Update application status
+export const updateStudentApplicationStatus = async (id: number, status: string, adminNotes?: string): Promise<{ success: boolean; application: StudentApplication }> => {
+  const response = await api.put(`/student-applications/admin/${id}/status`, { status, adminNotes });
+  return response.data;
+};
+
+// Admin: Add notes
+export const addStudentApplicationNotes = async (id: number, notes: string): Promise<{ success: boolean }> => {
+  const response = await api.post(`/student-applications/admin/${id}/notes`, { notes });
+  return response.data;
+};
+
+// Admin: Update payment status (fee waiver)
+export const updateStudentApplicationPayment = async (id: number, paymentStatus: string, paymentReference?: string): Promise<{ success: boolean }> => {
+  const response = await api.put(`/student-applications/admin/${id}/payment`, { paymentStatus, paymentReference });
+  return response.data;
+};
+
+// Admin: Delete application
+export const deleteStudentApplication = async (id: number): Promise<void> => {
+  await api.delete(`/student-applications/admin/${id}`);
+};
+
+// ============================================
+// Applicant Account APIs
+// ============================================
+
+const APPLICANT_TOKEN_KEY = 'kemu_applicant_token';
+
+// Helper to get applicant token
+const getApplicantHeaders = () => {
+  const token = localStorage.getItem(APPLICANT_TOKEN_KEY);
+  return token ? { Authorization: `Bearer ${token}` } : {};
+};
+
+// Register new applicant (sends OTP)
+export const registerApplicant = async (data: {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  phone?: string;
+  phoneCode?: string;
+  nationalId?: string;
+  otpMethod?: 'email' | 'phone';
+}): Promise<ApplicantAuthResponse & { requiresVerification?: boolean }> => {
+  const response = await api.post('/applicant/register', data);
+  return response.data;
+};
+
+// Verify OTP and complete registration
+export const verifyOTP = async (email: string, otp: string): Promise<ApplicantAuthResponse> => {
+  const response = await api.post('/applicant/verify-otp', { email, otp });
+  return response.data;
+};
+
+// Resend OTP
+export const resendOTP = async (email: string): Promise<{ success: boolean; message: string }> => {
+  const response = await api.post('/applicant/resend-otp', { email });
+  return response.data;
+};
+
+// Login applicant
+export const loginApplicant = async (email: string, password: string): Promise<ApplicantAuthResponse> => {
+  const response = await api.post('/applicant/login', { email, password });
+  return response.data;
+};
+
+// Get current applicant profile
+export const getApplicantProfile = async (): Promise<{ success: boolean; applicant: Applicant }> => {
+  const response = await api.get('/applicant/me', { headers: getApplicantHeaders() });
+  return response.data;
+};
+
+// Update applicant profile
+export const updateApplicantProfile = async (data: Partial<Applicant>): Promise<{ success: boolean; applicant: Applicant }> => {
+  const response = await api.put('/applicant/profile', data, { headers: getApplicantHeaders() });
+  return response.data;
+};
+
+// Get applicant's applications
+export const getApplicantApplications = async (): Promise<ApplicantApplicationsResponse> => {
+  const response = await api.get('/applicant/applications', { headers: getApplicantHeaders() });
+  return response.data;
+};
+
+// Change password
+export const changeApplicantPassword = async (currentPassword: string, newPassword: string): Promise<{ success: boolean; message: string }> => {
+  const response = await api.post('/applicant/change-password', { currentPassword, newPassword }, { headers: getApplicantHeaders() });
+  return response.data;
+};
+
+// Link existing application to account
+export const linkApplicationToAccount = async (applicationId: string, nationalId?: string): Promise<{ success: boolean; message: string }> => {
+  const response = await api.post('/applicant/link-application', { applicationId, nationalId }, { headers: getApplicantHeaders() });
+  return response.data;
 };
 
 export default api;

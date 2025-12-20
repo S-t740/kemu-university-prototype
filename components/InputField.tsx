@@ -3,7 +3,7 @@ import { LucideIcon } from 'lucide-react';
 
 interface InputFieldProps {
   label?: string;
-  name: string;
+  name?: string;
   type?: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
@@ -30,6 +30,7 @@ const InputField: React.FC<InputFieldProps> = ({
   rows = 4,
   className = '',
 }) => {
+  const inputName = name || label?.toLowerCase().replace(/\s+/g, '-') || 'input';
   const inputClasses = `
     w-full px-4 py-3 rounded-xl border-2 transition-all duration-300
     ${error
@@ -44,23 +45,23 @@ const InputField: React.FC<InputFieldProps> = ({
   return (
     <div className="mb-4">
       {label && (
-        <label htmlFor={name} className="block text-sm font-semibold text-gray-700 mb-2">
+        <label htmlFor={inputName} className="block text-sm font-semibold text-gray-700 mb-2">
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
         </label>
       )}
-      
+
       <div className="relative">
         {Icon && (
           <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
             <Icon size={20} />
           </div>
         )}
-        
+
         {multiline ? (
           <textarea
-            id={name}
-            name={name}
+            id={inputName}
+            name={inputName}
             value={value}
             onChange={onChange}
             placeholder={placeholder}
@@ -70,8 +71,8 @@ const InputField: React.FC<InputFieldProps> = ({
           />
         ) : (
           <input
-            id={name}
-            name={name}
+            id={inputName}
+            name={inputName}
             type={type}
             value={value}
             onChange={onChange}
@@ -81,7 +82,7 @@ const InputField: React.FC<InputFieldProps> = ({
           />
         )}
       </div>
-      
+
       {error && (
         <p className="mt-1 text-sm text-red-600 animate-fade-in">{error}</p>
       )}

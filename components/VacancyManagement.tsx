@@ -46,7 +46,7 @@ const VacancyManagement: React.FC<VacancyManagementProps> = ({
             return;
         }
         setVacancyImages(prev => [...prev, ...newFiles]);
-        const previews = newFiles.map(file => URL.createObjectURL(file));
+        const previews = newFiles.map((file: File) => URL.createObjectURL(file));
         setVacancyImagePreviews(prev => [...prev, ...previews]);
     };
 
@@ -304,7 +304,7 @@ const VacancyManagement: React.FC<VacancyManagementProps> = ({
                                     <td className="px-6 py-4 text-sm text-gray-600">{vacancy.location}</td>
                                     <td className="px-6 py-4">
                                         <span className={`inline-flex px-2.5 py-1 rounded-full text-xs font-medium ${vacancy.type === 'Academic' ? 'bg-purple-100 text-purple-800' :
-                                                vacancy.type === 'Administrative' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'
+                                            vacancy.type === 'Administrative' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'
                                             }`}>{vacancy.type}</span>
                                     </td>
                                     <td className="px-6 py-4">
