@@ -19,7 +19,7 @@ const Hero: React.FC = () => {
                     playsInline
                     className="w-full h-full object-cover"
                 >
-                    <source src="/2.MP4" type="video/mp4" />
+                    <source src="/2.mp4" type="video/mp4" />
                 </video>
                 {/* Dark overlay for better text readability */}
                 <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
