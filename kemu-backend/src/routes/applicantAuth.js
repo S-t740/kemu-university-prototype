@@ -2,7 +2,6 @@ import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { PrismaClient } from '@prisma/client';
-import { generateOTP, getOTPExpiry, sendOTPEmail, sendOTPSMS, verifyOTP } from '../services/otpService.js';
 
 const router = express.Router();
 const prisma = new PrismaClient();
@@ -29,10 +28,10 @@ export const authenticateApplicant = (req, res, next) => {
     }
 };
 
-// POST /api/applicant/register - Create new applicant account with OTP verification
+// POST /api/applicant/register - Create new applicant account (no OTP verification)
 router.post('/register', async (req, res) => {
     try {
-        const { email, password, firstName, lastName, phone, phoneCode, nationalId, otpMethod } = req.body;
+        const { email, password, firstName, lastName, phone, phoneCode, nationalId } = req.body;
 
         // Validation
         if (!email || !password || !firstName || !lastName) {
@@ -43,62 +42,19 @@ router.post('/register', async (req, res) => {
             return res.status(400).json({ error: 'Password must be at least 6 characters' });
         }
 
-        // Validate OTP method
-        const verifyMethod = otpMethod || 'email';
-        if (verifyMethod === 'phone' && !phone) {
-            return res.status(400).json({ error: 'Phone number is required for SMS verification' });
-        }
-
         // Check if email already exists
         const existingApplicant = await prisma.applicant.findUnique({
             where: { email: email.toLowerCase() }
         });
 
         if (existingApplicant) {
-            // If already verified, reject
-            if (existingApplicant.isVerified) {
-                return res.status(400).json({ error: 'An account with this email already exists' });
-            }
-            // If unverified, allow re-registration (update existing)
-            const otp = generateOTP();
-            const otpExpiry = getOTPExpiry();
-
-            await prisma.applicant.update({
-                where: { email: email.toLowerCase() },
-                data: {
-                    password: await bcrypt.hash(password, 12),
-                    firstName,
-                    lastName,
-                    phone: phone || null,
-                    phoneCode: phoneCode || '+254',
-                    nationalId: nationalId || null,
-                    otpCode: otp,
-                    otpExpiry,
-                    otpMethod: verifyMethod
-                }
-            });
-
-            // Send OTP
-            if (verifyMethod === 'phone') {
-                await sendOTPSMS(phoneCode || '+254', phone, otp);
-            } else {
-                await sendOTPEmail(email.toLowerCase(), otp);
-            }
-
-            return res.status(200).json({
-                success: true,
-                message: `Verification code sent to your ${verifyMethod}`,
-                requiresVerification: true,
-                email: email.toLowerCase()
-            });
+            return res.status(400).json({ error: 'An account with this email already exists' });
         }
 
         // Hash password
         const hashedPassword = await bcrypt.hash(password, 12);
-        const otp = generateOTP();
-        const otpExpiry = getOTPExpiry();
 
-        // Create applicant with OTP
+        // Create applicant (already verified, no OTP needed)
         const applicant = await prisma.applicant.create({
             data: {
                 email: email.toLowerCase(),
@@ -108,79 +64,20 @@ router.post('/register', async (req, res) => {
                 phone: phone || null,
                 phoneCode: phoneCode || '+254',
                 nationalId: nationalId || null,
-                isVerified: false,
-                otpCode: otp,
-                otpExpiry,
-                otpMethod: verifyMethod
+                isVerified: true  // Directly verified, no OTP
             }
         });
 
-        // Send OTP
-        if (verifyMethod === 'phone') {
-            await sendOTPSMS(phoneCode || '+254', phone, otp);
-        } else {
-            await sendOTPEmail(email.toLowerCase(), otp);
-        }
-
-        res.status(201).json({
-            success: true,
-            message: `Verification code sent to your ${verifyMethod}`,
-            requiresVerification: true,
-            email: applicant.email
-        });
-    } catch (error) {
-        console.error('Registration error:', error);
-        res.status(500).json({ error: 'Failed to create account' });
-    }
-});
-
-// POST /api/applicant/verify-otp - Verify OTP and complete registration
-router.post('/verify-otp', async (req, res) => {
-    try {
-        const { email, otp } = req.body;
-
-        if (!email || !otp) {
-            return res.status(400).json({ error: 'Email and OTP are required' });
-        }
-
-        const applicant = await prisma.applicant.findUnique({
-            where: { email: email.toLowerCase() }
-        });
-
-        if (!applicant) {
-            return res.status(404).json({ error: 'Account not found' });
-        }
-
-        if (applicant.isVerified) {
-            return res.status(400).json({ error: 'Account is already verified' });
-        }
-
-        // Verify OTP
-        const verification = verifyOTP(applicant.otpCode, otp, applicant.otpExpiry);
-        if (!verification.valid) {
-            return res.status(400).json({ error: verification.error });
-        }
-
-        // Mark as verified and clear OTP
-        await prisma.applicant.update({
-            where: { email: email.toLowerCase() },
-            data: {
-                isVerified: true,
-                otpCode: null,
-                otpExpiry: null
-            }
-        });
-
-        // Generate JWT token
+        // Generate JWT token for immediate login
         const token = jwt.sign(
             { id: applicant.id, email: applicant.email, type: 'applicant' },
             JWT_SECRET,
             { expiresIn: JWT_EXPIRES_IN }
         );
 
-        res.json({
+        res.status(201).json({
             success: true,
-            message: 'Account verified successfully',
+            message: 'Account created successfully',
             token,
             applicant: {
                 id: applicant.id,
@@ -192,69 +89,11 @@ router.post('/verify-otp', async (req, res) => {
             }
         });
     } catch (error) {
-        console.error('OTP verification error:', error);
-        res.status(500).json({ error: 'Failed to verify OTP' });
+        console.error('Registration error:', error);
+        res.status(500).json({ error: 'Failed to create account' });
     }
 });
 
-// POST /api/applicant/resend-otp - Resend OTP
-router.post('/resend-otp', async (req, res) => {
-    try {
-        const { email } = req.body;
-
-        if (!email) {
-            return res.status(400).json({ error: 'Email is required' });
-        }
-
-        const applicant = await prisma.applicant.findUnique({
-            where: { email: email.toLowerCase() }
-        });
-
-        if (!applicant) {
-            return res.status(404).json({ error: 'Account not found' });
-        }
-
-        if (applicant.isVerified) {
-            return res.status(400).json({ error: 'Account is already verified' });
-        }
-
-        // Check cooldown (60 seconds)
-        if (applicant.otpExpiry) {
-            const lastSent = new Date(applicant.otpExpiry.getTime() - 10 * 60 * 1000);
-            const cooldownEnd = new Date(lastSent.getTime() + 60 * 1000);
-            if (new Date() < cooldownEnd) {
-                const waitSeconds = Math.ceil((cooldownEnd.getTime() - Date.now()) / 1000);
-                return res.status(429).json({
-                    error: `Please wait ${waitSeconds} seconds before requesting a new code`
-                });
-            }
-        }
-
-        // Generate new OTP
-        const otp = generateOTP();
-        const otpExpiry = getOTPExpiry();
-
-        await prisma.applicant.update({
-            where: { email: email.toLowerCase() },
-            data: { otpCode: otp, otpExpiry }
-        });
-
-        // Send OTP
-        if (applicant.otpMethod === 'phone') {
-            await sendOTPSMS(applicant.phoneCode || '+254', applicant.phone, otp);
-        } else {
-            await sendOTPEmail(email.toLowerCase(), otp);
-        }
-
-        res.json({
-            success: true,
-            message: `New verification code sent to your ${applicant.otpMethod || 'email'}`
-        });
-    } catch (error) {
-        console.error('Resend OTP error:', error);
-        res.status(500).json({ error: 'Failed to resend OTP' });
-    }
-});
 
 // POST /api/applicant/login - Login applicant
 router.post('/login', async (req, res) => {

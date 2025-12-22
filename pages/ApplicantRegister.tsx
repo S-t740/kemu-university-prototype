@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import {
     Mail, Lock, User, Phone, IdCard, ArrowRight, Loader2,
-    Eye, EyeOff, Sparkles, CheckCircle, RefreshCw
+    Eye, EyeOff, Sparkles
 } from 'lucide-react';
-import { registerApplicant, verifyOTP, resendOTP } from '../services/api';
+import { registerApplicant } from '../services/api';
 import { useApplicantAuth } from '../contexts/ApplicantAuthContext';
 
 interface PhoneCountry {
@@ -34,10 +34,6 @@ const ApplicantRegister: React.FC = () => {
     const location = useLocation();
     const { refreshProfile, isAuthenticated } = useApplicantAuth();
 
-    // Step: 'form' | 'verify'
-    const [step, setStep] = useState<'form' | 'verify'>('form');
-    const [registeredEmail, setRegisteredEmail] = useState('');
-
     // Form state
     const [formData, setFormData] = useState({
         firstName: '',
@@ -47,19 +43,11 @@ const ApplicantRegister: React.FC = () => {
         phoneCode: '+254',
         nationalId: '',
         password: '',
-        confirmPassword: '',
-        otpMethod: 'email' as 'email' | 'phone'
+        confirmPassword: ''
     });
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-
-    // OTP state
-    const [otp, setOtp] = useState('');
-    const [verifying, setVerifying] = useState(false);
-    const [resendCooldown, setResendCooldown] = useState(0);
-    const [resendLoading, setResendLoading] = useState(false);
-    const [verifyError, setVerifyError] = useState('');
 
     // Redirect if already authenticated
     useEffect(() => {
@@ -68,14 +56,6 @@ const ApplicantRegister: React.FC = () => {
             navigate(from, { replace: true });
         }
     }, [isAuthenticated, navigate, location]);
-
-    // Resend cooldown timer
-    useEffect(() => {
-        if (resendCooldown > 0) {
-            const timer = setTimeout(() => setResendCooldown(resendCooldown - 1), 1000);
-            return () => clearTimeout(timer);
-        }
-    }, [resendCooldown]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -103,11 +83,6 @@ const ApplicantRegister: React.FC = () => {
             return;
         }
 
-        if (formData.otpMethod === 'phone' && !formData.phone) {
-            setError('Phone number is required for SMS verification');
-            return;
-        }
-
         setLoading(true);
 
         try {
@@ -118,16 +93,11 @@ const ApplicantRegister: React.FC = () => {
                 lastName: formData.lastName,
                 phone: formData.phone || undefined,
                 phoneCode: formData.phoneCode,
-                nationalId: formData.nationalId || undefined,
-                otpMethod: formData.otpMethod
+                nationalId: formData.nationalId || undefined
             });
 
-            if (response.requiresVerification) {
-                setRegisteredEmail(formData.email);
-                setStep('verify');
-                setResendCooldown(60);
-            } else if (response.token) {
-                // Legacy: auto-login if token returned
+            if (response.token) {
+                // Auto-login with returned token
                 localStorage.setItem(APPLICANT_TOKEN_KEY, response.token);
                 await refreshProfile();
                 const from = (location.state as any)?.from || '/applicant/dashboard';
@@ -140,146 +110,6 @@ const ApplicantRegister: React.FC = () => {
         }
     };
 
-    const handleVerifyOTP = async () => {
-        if (!otp || otp.length !== 6) {
-            setVerifyError('Please enter the 6-digit code');
-            return;
-        }
-
-        setVerifying(true);
-        setVerifyError('');
-
-        try {
-            const response = await verifyOTP(registeredEmail, otp);
-            if (response.success && response.token) {
-                localStorage.setItem(APPLICANT_TOKEN_KEY, response.token);
-                await refreshProfile();
-                const from = (location.state as any)?.from || '/applicant/dashboard';
-                navigate(from, { replace: true });
-            }
-        } catch (err: any) {
-            setVerifyError(err.message || 'Verification failed');
-        } finally {
-            setVerifying(false);
-        }
-    };
-
-    const handleResendOTP = async () => {
-        setResendLoading(true);
-        setVerifyError('');
-
-        try {
-            await resendOTP(registeredEmail);
-            setResendCooldown(60);
-        } catch (err: any) {
-            setVerifyError(err.message || 'Failed to resend code');
-        } finally {
-            setResendLoading(false);
-        }
-    };
-
-    // OTP Verification Step
-    if (step === 'verify') {
-        return (
-            <div className="min-h-screen bg-gradient-to-b from-kemu-purple/5 to-white flex items-center justify-center px-4">
-                <div className="max-w-md w-full">
-                    <div className="bg-white rounded-2xl shadow-xl p-8">
-                        <div className="text-center mb-8">
-                            <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
-                                <CheckCircle size={32} className="text-green-600" />
-                            </div>
-                            <h2 className="text-2xl font-bold text-gray-800">Verify Your Account</h2>
-                            <p className="text-gray-600 mt-2">
-                                We sent a verification code to your {formData.otpMethod === 'phone' ? 'phone' : 'email'}
-                            </p>
-                            <p className="text-kemu-purple font-medium mt-1">
-                                {formData.otpMethod === 'phone'
-                                    ? `${formData.phoneCode} ${formData.phone}`
-                                    : registeredEmail
-                                }
-                            </p>
-                        </div>
-
-                        {verifyError && (
-                            <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-6 text-red-700 text-sm">
-                                {verifyError}
-                            </div>
-                        )}
-
-                        <div className="mb-6">
-                            <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                Enter 6-Digit Code
-                            </label>
-                            <input
-                                type="text"
-                                value={otp}
-                                onChange={(e) => {
-                                    const value = e.target.value.replace(/\D/g, '').slice(0, 6);
-                                    setOtp(value);
-                                    setVerifyError('');
-                                }}
-                                placeholder="000000"
-                                maxLength={6}
-                                className="w-full px-4 py-4 text-center text-2xl font-mono tracking-widest border-2 
-                                    border-gray-200 rounded-xl focus:border-kemu-purple focus:outline-none"
-                                autoFocus
-                            />
-                        </div>
-
-                        <button
-                            onClick={handleVerifyOTP}
-                            disabled={verifying || otp.length !== 6}
-                            className="w-full py-3 bg-gradient-to-r from-kemu-purple to-kemu-gold text-white 
-                                rounded-xl font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 
-                                flex items-center justify-center gap-2"
-                        >
-                            {verifying ? (
-                                <Loader2 size={20} className="animate-spin" />
-                            ) : (
-                                <>
-                                    Verify & Continue
-                                    <ArrowRight size={20} />
-                                </>
-                            )}
-                        </button>
-
-                        <div className="mt-6 text-center">
-                            <p className="text-gray-500 text-sm mb-2">Didn't receive the code?</p>
-                            {resendCooldown > 0 ? (
-                                <p className="text-gray-400 text-sm">
-                                    Resend in {resendCooldown} seconds
-                                </p>
-                            ) : (
-                                <button
-                                    onClick={handleResendOTP}
-                                    disabled={resendLoading}
-                                    className="text-kemu-purple font-medium hover:underline flex items-center justify-center gap-2"
-                                >
-                                    {resendLoading ? (
-                                        <Loader2 size={16} className="animate-spin" />
-                                    ) : (
-                                        <RefreshCw size={16} />
-                                    )}
-                                    Resend Code
-                                </button>
-                            )}
-                        </div>
-
-                        <div className="mt-6 pt-6 border-t text-center">
-                            <button
-                                onClick={() => setStep('form')}
-                                className="text-gray-500 hover:text-gray-700 text-sm"
-                            >
-                                ← Back to registration
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
-    // Registration Form Step
     return (
         <div className="min-h-screen bg-gradient-to-b from-kemu-purple/5 to-white">
             {/* Header */}
@@ -357,7 +187,7 @@ const ApplicantRegister: React.FC = () => {
                         {/* Phone */}
                         <div className="mb-4">
                             <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                Phone Number {formData.otpMethod === 'phone' && <span className="text-red-500">*</span>}
+                                Phone Number <span className="text-gray-400 font-normal">(optional)</span>
                             </label>
                             <div className="flex gap-2">
                                 <select
@@ -405,7 +235,7 @@ const ApplicantRegister: React.FC = () => {
                         </div>
 
                         {/* Password */}
-                        <div className="grid grid-cols-2 gap-4 mb-4">
+                        <div className="grid grid-cols-2 gap-4 mb-6">
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                                     Password <span className="text-red-500">*</span>
@@ -441,43 +271,6 @@ const ApplicantRegister: React.FC = () => {
                                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-kemu-purple focus:outline-none"
                                     placeholder="••••••"
                                 />
-                            </div>
-                        </div>
-
-                        {/* OTP Method Selection */}
-                        <div className="mb-6 p-4 bg-gray-50 rounded-xl">
-                            <label className="block text-sm font-semibold text-gray-700 mb-3">
-                                Verify your account via:
-                            </label>
-                            <div className="flex gap-4">
-                                <label className="flex-1 flex items-center gap-3 p-3 border-2 rounded-xl cursor-pointer transition-colors hover:bg-white"
-                                    style={{ borderColor: formData.otpMethod === 'email' ? '#871054' : '#e5e7eb' }}
-                                >
-                                    <input
-                                        type="radio"
-                                        name="otpMethod"
-                                        value="email"
-                                        checked={formData.otpMethod === 'email'}
-                                        onChange={handleChange}
-                                        className="accent-kemu-purple"
-                                    />
-                                    <Mail size={18} className="text-gray-500" />
-                                    <span className="font-medium text-gray-700">Email</span>
-                                </label>
-                                <label className="flex-1 flex items-center gap-3 p-3 border-2 rounded-xl cursor-pointer transition-colors hover:bg-white"
-                                    style={{ borderColor: formData.otpMethod === 'phone' ? '#871054' : '#e5e7eb' }}
-                                >
-                                    <input
-                                        type="radio"
-                                        name="otpMethod"
-                                        value="phone"
-                                        checked={formData.otpMethod === 'phone'}
-                                        onChange={handleChange}
-                                        className="accent-kemu-purple"
-                                    />
-                                    <Phone size={18} className="text-gray-500" />
-                                    <span className="font-medium text-gray-700">Phone</span>
-                                </label>
                             </div>
                         </div>
 
