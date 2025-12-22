@@ -80,15 +80,13 @@ const TVETAdmissions: React.FC = () => {
                             <li className="flex items-center"><CheckCircle size={16} className="mr-2 text-kemu-gold" />Passport-sized photographs</li>
                         </ul>
 
-                        <a
-                            href="https://admissions.kemu.ac.ke/"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <Link
+                            to="/tvet/student-apply"
                             className="inline-flex items-center gap-2 px-6 py-3 bg-kemu-gold text-white rounded-xl font-semibold hover:bg-kemu-gold/90 transition-colors"
                         >
-                            Application Portal
-                            <ExternalLink size={18} />
-                        </a>
+                            Apply Now
+                            <ArrowRight size={18} />
+                        </Link>
                     </div>
 
                     {/* Intakes Card */}

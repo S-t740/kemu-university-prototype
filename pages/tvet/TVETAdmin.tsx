@@ -7,6 +7,7 @@ import Modal from '../../components/Modal';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import CollapsibleSection from '../../components/admin/CollapsibleSection';
 import ApplicationsManagement from '../../components/ApplicationsManagement';
+import StudentApplicationsManagement from '../../components/StudentApplicationsManagement';
 import { createSlug, handleApiError, getStorageItem, setStorageItem, removeStorageItem } from '../../utils';
 import { STORAGE_KEYS, API_BASE_URL } from '../../constants';
 import { formatDate } from '../../utils';
@@ -25,7 +26,7 @@ const TVETAdmin: React.FC = () => {
     const [loginError, setLoginError] = useState<string>('');
     const [loginErrors, setLoginErrors] = useState<Record<string, string>>({});
 
-    const [activeTab, setActiveTab] = useState<'programs' | 'news' | 'events' | 'vacancies' | 'applications'>('programs');
+    const [activeTab, setActiveTab] = useState<'programs' | 'news' | 'events' | 'vacancies' | 'applications' | 'student-applications'>('programs');
     const [programs, setPrograms] = useState<Program[]>([]);
     const [news, setNews] = useState<NewsItem[]>([]);
     const [events, setEvents] = useState<EventItem[]>([]);
@@ -472,7 +473,11 @@ const TVETAdmin: React.FC = () => {
                     </button>
                     <button role="tab" aria-selected={activeTab === 'applications'} onClick={() => setActiveTab('applications')}
                         className={`flex items-center px-6 py-3 rounded-lg font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-kemu-purple focus:ring-offset-2 transition-all duration-200 ${activeTab === 'applications' ? 'bg-gradient-to-r from-kemu-gold to-kemu-purple text-white shadow-md' : 'bg-transparent text-gray-600 hover:bg-gray-50 hover:text-kemu-gold'}`}>
-                        <Users size={18} className="mr-2" /> Applications
+                        <Briefcase size={18} className="mr-2" /> Job Applications
+                    </button>
+                    <button role="tab" aria-selected={activeTab === 'student-applications'} onClick={() => setActiveTab('student-applications')}
+                        className={`flex items-center px-6 py-3 rounded-lg font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-kemu-purple focus:ring-offset-2 transition-all duration-200 ${activeTab === 'student-applications' ? 'bg-gradient-to-r from-green-600 to-kemu-purple text-white shadow-md' : 'bg-transparent text-gray-600 hover:bg-gray-50 hover:text-green-600'}`}>
+                        <Users size={18} className="mr-2" /> Student Applications
                     </button>
                 </div>
 
@@ -520,6 +525,8 @@ const TVETAdmin: React.FC = () => {
                     <div className="flex justify-center py-12"><LoadingSpinner /></div>
                 ) : activeTab === 'applications' ? (
                     <ApplicationsManagement institution="TVET" onRefreshData={refreshData} />
+                ) : activeTab === 'student-applications' ? (
+                    <StudentApplicationsManagement institution="TVET" />
                 ) : (
                     <div className="grid lg:grid-cols-3 gap-6">
                         {/* Professional Form Section */}
