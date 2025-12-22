@@ -98,6 +98,39 @@ async function main() {
   }
   console.log('✅ Programs created');
 
+  // Create TVET Programs
+  const tvetPrograms = [
+    // Artisan Programmes (Level 3)
+    { title: 'Artisan in Electrical Installation', slug: 'tvet-artisan-electrical', degreeType: 'Artisan', duration: '6 Months', overview: 'Gain hands-on skills in domestic and industrial electrical installations, wiring, and maintenance.', requirements: 'KCSE D or equivalent', institution: 'TVET', schoolId: schools['school-of-science-and-technology'].id },
+    { title: 'Artisan in Motor Vehicle Mechanics', slug: 'tvet-artisan-motor-vehicle', degreeType: 'Artisan', duration: '6 Months', overview: 'Learn practical skills in vehicle maintenance, engine repair, and automotive systems.', requirements: 'KCSE D or equivalent', institution: 'TVET', schoolId: schools['school-of-science-and-technology'].id },
+    { title: 'Artisan in Plumbing', slug: 'tvet-artisan-plumbing', degreeType: 'Artisan', duration: '6 Months', overview: 'Master pipe installation, water systems, and sanitary plumbing for residential and commercial buildings.', requirements: 'KCSE D or equivalent', institution: 'TVET', schoolId: schools['school-of-science-and-technology'].id },
+    { title: 'Artisan in Welding and Fabrication', slug: 'tvet-artisan-welding', degreeType: 'Artisan', duration: '6 Months', overview: 'Develop skills in metal joining, cutting, and fabrication techniques for construction and manufacturing.', requirements: 'KCSE D or equivalent', institution: 'TVET', schoolId: schools['school-of-science-and-technology'].id },
+    { title: 'Artisan in Beauty Therapy', slug: 'tvet-artisan-beauty', degreeType: 'Artisan', duration: '6 Months', overview: 'Learn beauty treatments, skincare, makeup application, and spa therapy techniques.', requirements: 'KCSE D or equivalent', institution: 'TVET', schoolId: schools['kemu-business-school'].id },
+
+    // Craft Certificate Programmes (Level 4-5)
+    { title: 'Craft Certificate in ICT', slug: 'tvet-craft-ict', degreeType: 'Craft Certificate', duration: '1 Year', overview: 'Comprehensive training in computer applications, networking basics, and IT support.', requirements: 'KCSE D+ or equivalent', institution: 'TVET', schoolId: schools['school-of-computing-and-informatics'].id },
+    { title: 'Craft Certificate in Food and Beverage Production', slug: 'tvet-craft-food-beverage', degreeType: 'Craft Certificate', duration: '1 Year', overview: 'Learn food preparation, kitchen management, and hospitality service skills.', requirements: 'KCSE D+ or equivalent', institution: 'TVET', schoolId: schools['kemu-business-school'].id },
+    { title: 'Craft Certificate in Business Management', slug: 'tvet-craft-business', degreeType: 'Craft Certificate', duration: '1 Year', overview: 'Foundational business skills including bookkeeping, entrepreneurship, and office administration.', requirements: 'KCSE D+ or equivalent', institution: 'TVET', schoolId: schools['kemu-business-school'].id },
+    { title: 'Craft Certificate in Community Health', slug: 'tvet-craft-community-health', degreeType: 'Craft Certificate', duration: '1 Year', overview: 'Training in community health education, disease prevention, and primary healthcare support.', requirements: 'KCSE D+ or equivalent', institution: 'TVET', schoolId: schools['school-of-health-sciences'].id },
+    { title: 'Craft Certificate in Agriculture', slug: 'tvet-craft-agriculture', degreeType: 'Craft Certificate', duration: '1 Year', overview: 'Practical skills in crop production, animal husbandry, and sustainable farming practices.', requirements: 'KCSE D+ or equivalent', institution: 'TVET', schoolId: schools['school-of-science-and-technology'].id },
+
+    // Diploma Programmes (Level 6)
+    { title: 'Diploma in Information Communication Technology', slug: 'tvet-diploma-ict', degreeType: 'Diploma', duration: '2 Years', overview: 'Advanced ICT training covering programming, database management, and network administration.', requirements: 'KCSE C- or equivalent', institution: 'TVET', schoolId: schools['school-of-computing-and-informatics'].id },
+    { title: 'Diploma in Business Management', slug: 'tvet-diploma-business', degreeType: 'Diploma', duration: '2 Years', overview: 'Comprehensive business education including accounting, marketing, and human resource management.', requirements: 'KCSE C- or equivalent', institution: 'TVET', schoolId: schools['kemu-business-school'].id },
+    { title: 'Diploma in Hospitality Management', slug: 'tvet-diploma-hospitality', degreeType: 'Diploma', duration: '2 Years', overview: 'Professional training in hotel operations, tourism, and hospitality industry management.', requirements: 'KCSE C- or equivalent', institution: 'TVET', schoolId: schools['kemu-business-school'].id },
+    { title: 'Diploma in Social Work and Community Development', slug: 'tvet-diploma-social-work', degreeType: 'Diploma', duration: '2 Years', overview: 'Training in community development, social welfare, and counseling skills.', requirements: 'KCSE C- or equivalent', institution: 'TVET', schoolId: schools['school-of-education-and-social-sciences'].id },
+    { title: 'Diploma in Electrical and Electronics Engineering', slug: 'tvet-diploma-electrical', degreeType: 'Diploma', duration: '2 Years', overview: 'Technical training in electrical systems, electronics, and power engineering.', requirements: 'KCSE C- or equivalent', institution: 'TVET', schoolId: schools['school-of-science-and-technology'].id },
+  ];
+
+  for (const program of tvetPrograms) {
+    await prisma.program.upsert({
+      where: { slug: program.slug },
+      update: { title: program.title, degreeType: program.degreeType, duration: program.duration, overview: program.overview, requirements: program.requirements, institution: program.institution, schoolId: program.schoolId },
+      create: program
+    });
+  }
+  console.log('✅ TVET Programs created');
+
   // Create news
   const newsItems = [
     {
