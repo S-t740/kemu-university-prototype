@@ -102,8 +102,8 @@ const TVETPrograms: React.FC = () => {
                                         key={level}
                                         onClick={() => setSelectedLevel(level)}
                                         className={`px-4 py-2 rounded-lg font-medium transition-all ${selectedLevel === level
-                                                ? 'bg-kemu-purple text-white'
-                                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                            ? 'bg-kemu-purple text-white'
+                                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                             }`}
                                     >
                                         {level}
@@ -190,7 +190,7 @@ const TVETPrograms: React.FC = () => {
                         Join KeMU TVET Institute and gain industry-ready skills. Intakes: January, May, September.
                     </p>
                     <Link
-                        to="/tvet/admissions"
+                        to="/tvet/student-apply"
                         className="inline-flex items-center gap-2 px-8 py-4 bg-kemu-gold text-white rounded-xl font-semibold text-lg shadow-deep-3d hover:shadow-glow-gold hover:scale-105 transition-all"
                     >
                         Apply Now

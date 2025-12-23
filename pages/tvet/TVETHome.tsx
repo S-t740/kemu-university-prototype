@@ -102,7 +102,7 @@ const TVETHome: React.FC = () => {
                             </Link>
 
                             <Link
-                                to="/tvet/admissions"
+                                to="/tvet/student-apply"
                                 className="group inline-flex items-center gap-2 px-8 py-4 bg-white/20 backdrop-blur-md border-2 border-white text-white rounded-xl font-semibold text-lg hover:bg-white hover:text-kemu-purple hover:scale-105 transition-all duration-300"
                             >
                                 <span>Apply Now</span>
@@ -332,7 +332,7 @@ const TVETHome: React.FC = () => {
                                 Scholarships & bursaries available: KEMUDA, CDF, and partner organizations.
                             </p>
                             <Link
-                                to="/tvet/admissions"
+                                to="/tvet/student-apply"
                                 className="inline-flex items-center gap-2 px-6 py-3 bg-kemu-gold text-white rounded-xl font-semibold w-full justify-center hover:bg-kemu-gold/90 transition-colors"
                             >
                                 Apply to KeMU TVET

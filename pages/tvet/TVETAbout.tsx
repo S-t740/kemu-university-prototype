@@ -184,7 +184,7 @@ const TVETAbout: React.FC = () => {
                         </div>
                         <div className="mt-6">
                             <Link
-                                to="/tvet/admissions"
+                                to="/tvet/student-apply"
                                 className="inline-flex items-center gap-2 px-6 py-3 bg-kemu-gold text-white rounded-xl font-semibold w-full justify-center hover:bg-kemu-gold/90 transition-colors"
                             >
                                 Apply Now

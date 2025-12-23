@@ -259,7 +259,7 @@ const TVETCareers: React.FC = () => {
                             <ArrowRight size={18} />
                         </Link>
                         <Link
-                            to="/tvet/admissions"
+                            to="/tvet/student-apply"
                             className="inline-flex items-center gap-2 px-6 py-3 bg-kemu-gold text-white rounded-xl font-semibold hover:bg-kemu-gold/90 transition-colors"
                         >
                             Apply Now
